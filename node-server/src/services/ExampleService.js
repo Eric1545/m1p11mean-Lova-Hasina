@@ -1,5 +1,3 @@
-// const ExampleModel = require('../models/ExampleModel');
-
 const ExampleModel = require("../models/ExempleModel");
 
 async function getData() {

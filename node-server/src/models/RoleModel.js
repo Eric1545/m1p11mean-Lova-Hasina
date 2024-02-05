@@ -1,4 +1,3 @@
-// src/models/exampleModel.js
 const mongoose = require('mongoose');
 
 const RoleSchema = new mongoose.Schema({
