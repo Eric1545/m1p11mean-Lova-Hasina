@@ -1,4 +1,3 @@
-// src/database/database.js
 const mongoose = require('mongoose');
 const config = require('../config/config');
 const { insertDefaultRole } = require('../utils/InsertionDefaultData');

@@ -7,7 +7,7 @@ class AccountController {
       const data = await AccountService.getAccount();
       res.json({ message: 'GET request successful', data });
     } catch (error) {
-      console.error('Error in getExample:', error);
+      console.error('Error in getAccount:', error);
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }
@@ -18,7 +18,29 @@ class AccountController {
       const result = await AccountService.createAccount(postData);
       res.json({ message: 'POST request successful', result });
     } catch (error) {
-      console.error('Error in postExample:', error);
+      console.error('Error in postAccount:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async addFavoris(req, res){
+    const {idUtilisateur,idFavoris} = req.params;
+    try{
+      const result = await AccountService.addFavoris(idUtilisateur,idFavoris);
+      console.log(result)
+      res.json({ message: 'POST request successful', result });
+    } catch (error){
+      console.error('error')
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+  async removeFavoris(req, res){
+    const {idUtilisateur,idFavoris} = req.params;try{
+      const result = await AccountService.removeFavoris(idUtilisateur,idFavoris);
+      console.log(result)
+      res.json({ message: 'POST request successful', result });
+    } catch (error){
+      console.error('error')
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }

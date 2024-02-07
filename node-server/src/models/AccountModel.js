@@ -20,6 +20,7 @@ const accountSchema = new mongoose.Schema({
   heure_debut: { type: Date, required: true },
   heure_fin: { type: Date, required: true },
   role:{type: Schema.Types.ObjectId, ref: "roles"},
+  image_url:{ type: String, required: false}
 });
 
 
