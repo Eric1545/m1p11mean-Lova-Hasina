@@ -4,5 +4,6 @@ dotenv.config();
 module.exports = {
     database: process.env.DATABASE,
     password: process.env.PASSWORD,
-    user: process.env.USER
+    user: process.env.USER,
+    privateKey: process.env.PRIVATEKEY,
 };

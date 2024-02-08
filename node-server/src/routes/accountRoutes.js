@@ -6,5 +6,6 @@ router.get('/', AccountController.getAccount);
 router.post('/', AccountController.createAccount);
 router.post('/ajouterFavoris/:idUtilisateur/:idFavoris', AccountController.addFavoris);
 router.patch('/enleverFavoris/:idUtilisateur/:idFavoris', AccountController.removeFavoris);
+router.post('/login', AccountController.login);
 
 module.exports = router;

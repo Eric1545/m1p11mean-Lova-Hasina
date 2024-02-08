@@ -1,5 +1,7 @@
 const { Request, Response } = require('express');
 const AccountService = require('../services/AccountService');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 
 class AccountController {
   async getAccount(req, res) {
@@ -27,7 +29,6 @@ class AccountController {
     const {idUtilisateur,idFavoris} = req.params;
     try{
       const result = await AccountService.addFavoris(idUtilisateur,idFavoris);
-      console.log(result)
       res.json({ message: 'POST request successful', result });
     } catch (error){
       console.error('error')
@@ -35,12 +36,30 @@ class AccountController {
     }
   }
   async removeFavoris(req, res){
-    const {idUtilisateur,idFavoris} = req.params;try{
+    const {idUtilisateur,idFavoris} = req.params;
+    try{
       const result = await AccountService.removeFavoris(idUtilisateur,idFavoris);
-      console.log(result)
       res.json({ message: 'POST request successful', result });
     } catch (error){
       console.error('error')
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+  
+  async login(req, res){
+    const postData = req.body;
+    try{
+      const result = await AccountService.login(postData.username,postData.password);
+      console.log(result)
+      if (result.length >0){
+        const {username} = postData
+        const token = jwt.sign({username},config.privateKey)
+        res.json({ login: true,token });
+      } else{
+        res.json({ login:false });
+      }
+    } catch (error){
+      console.error('error',error)
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }

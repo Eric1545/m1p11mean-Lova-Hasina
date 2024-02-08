@@ -48,9 +48,19 @@ async function removeFavoris(idUtilisateur, idFavoris){
     throw error
   }
 }
+async function login(username, password){
+  try{
+    const utilisateur = await AccountModel.find({username,password})
+    return utilisateur
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
 module.exports = {
   getAccount,
   createAccount,
   addFavoris,
   removeFavoris,
+  login,
 };
