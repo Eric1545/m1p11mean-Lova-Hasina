@@ -5,7 +5,9 @@ const { envoyerEmail } = require("../utils/mailer");
 async function getAccount(pageNumber, pageSize) {
   try {
     const skip = (pageNumber - 1) * pageSize;
-    const accounts = await AccountModel.find({})
+    const role = await RoleModel.findOne({ role: 'employe' });
+    console.log(role);
+    const accounts = await AccountModel.find({role: role._id})
       .populate({ path: 'role', model: RoleModel })
       .skip(skip)
       .limit(pageSize);
