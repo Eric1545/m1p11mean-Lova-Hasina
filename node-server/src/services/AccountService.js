@@ -1,5 +1,6 @@
 const AccountModel = require("../models/AccountModel");
 const RoleModel = require('../models/RoleModel');
+const { envoyerEmail } = require("../utils/mailer");
 
 async function getAccount() {
   try {
@@ -57,10 +58,19 @@ async function login(username, password){
     throw error
   }
 }
+async function sendMailToUser(email, subject, content){
+  try{
+    await envoyerEmail(email, subject, content)
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
 module.exports = {
   getAccount,
   createAccount,
   addFavoris,
   removeFavoris,
   login,
+  sendMailToUser,
 };

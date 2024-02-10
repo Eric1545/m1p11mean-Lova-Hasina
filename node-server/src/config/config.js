@@ -6,4 +6,6 @@ module.exports = {
     password: process.env.PASSWORD,
     user: process.env.USER,
     privateKey: process.env.PRIVATEKEY,
+    mail: process.env.MAIL,
+    mailpassword: process.env.MAILPASSWORD,
 };

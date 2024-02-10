@@ -63,6 +63,16 @@ class AccountController {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }
+  async sendMail (req, res){
+    const postData = req.body;
+    try{
+      const result = await AccountService.sendMailToUser(postData.destinataire,postData.sujet,postData.contenu);
+      res.json({ message: 'POST request successful', result });
+    } catch (error){
+      console.error('error')
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
 }
 
 module.exports = new AccountController();
