@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UtilisateurModule } from './utilisateur/utilisateur.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { IdentificationUtilisateurModule } from './identification-utilisateur/identification-utilisateur.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { IdentificationUtilisateurModule } from './identification-utilisateur/id
     BrowserModule,
     UtilisateurModule,
     IdentificationUtilisateurModule,
+    MatPaginatorModule,
     AppRoutingModule//ito atao farany foana
   ],
   providers: [],
