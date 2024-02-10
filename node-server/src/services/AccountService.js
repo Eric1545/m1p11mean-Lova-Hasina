@@ -2,9 +2,13 @@ const AccountModel = require("../models/AccountModel");
 const RoleModel = require('../models/RoleModel');
 const { envoyerEmail } = require("../utils/mailer");
 
-async function getAccount() {
+async function getAccount(pageNumber, pageSize) {
   try {
-    const accounts = await AccountModel.find({}).populate({ path: 'role', model: RoleModel });
+    const skip = (pageNumber - 1) * pageSize;
+    const accounts = await AccountModel.find({})
+      .populate({ path: 'role', model: RoleModel })
+      .skip(skip)
+      .limit(pageSize);
     return accounts;
   } catch (error) {
     console.error('Error fetching data from database:', error);

@@ -5,8 +5,9 @@ const config = require('../config/config');
 
 class AccountController {
   async getAccount(req, res) {
+    const params = req.params;
     try {
-      const data = await AccountService.getAccount();
+      const data = await AccountService.getAccount(params.pageNumber,params.pageSize);
       res.json({ message: 'GET request successful', data });
     } catch (error) {
       console.error('Error in getAccount:', error);
