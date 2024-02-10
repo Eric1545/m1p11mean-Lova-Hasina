@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UtilisateurModule } from './utilisateur/utilisateur.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { IdentificationUtilisateurModule } from './identification-utilisateur/identification-utilisateur.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     UtilisateurModule,
+    IdentificationUtilisateurModule,
     AppRoutingModule//ito atao farany foana
   ],
   providers: [],

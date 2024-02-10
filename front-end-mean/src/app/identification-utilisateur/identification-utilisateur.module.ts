@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListeUtilisateurComponent } from './liste-utilisateur/liste-utilisateur.component';
+import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: 'liste-utilisateur', component: ListeUtilisateurComponent}
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
   declarations: [
-    ListeUtilisateurComponent
+    LoginComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
   ]
 })
-export class UtilisateurModule { }
+export class IdentificationUtilisateurModule { }

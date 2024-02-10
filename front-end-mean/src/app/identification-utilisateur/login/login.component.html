@@ -1,0 +1,14 @@
+<form 
+    #f="ngForm"
+    (ngSubmit)="f.form.valid && onSubmit()"
+>
+    <input type="text" name="username" ngModel required [(ngModel)]="form.email" #email="ngModel">
+    <div *ngIf="email.errors && f.submitted">vide</div>
+    <input type="password" name="password" ngModel required [(ngModel)]="form.password" #password="ngModel">
+    <button>Login</button>
+</form>
+
+<div>
+    <p>Email: {{form.email}}</p>
+    <p>password: {{form.password}}</p>
+</div>
