@@ -29,4 +29,15 @@ export class AuthService {
       return null
     }
   }
+  async creationUserClient(data:any){
+    try{
+      const role = await axios.get(`${this.url}/api/role`)
+      const idRoleClient = role.data.data.filter((value:any)=>value.role === "client")
+      data.role = idRoleClient[0]._id
+      return await axios.post(`${this.url}/api/account`,data)
+    }
+    catch(err){
+      return null
+    }
+  }
 }
