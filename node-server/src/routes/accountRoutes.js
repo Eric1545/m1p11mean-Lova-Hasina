@@ -1,5 +1,6 @@
 const express = require('express');
 const AccountController = require('../controllers/AccountController');
+const { verifyToken } = require('../middleware/auth');
 const router = express.Router();
 
 router.get('/getUtilisateur/:pageNumber/:pageSize', AccountController.getAccount);
@@ -8,5 +9,8 @@ router.post('/ajouterFavoris/:idUtilisateur/:idFavoris', AccountController.addFa
 router.patch('/enleverFavoris/:idUtilisateur/:idFavoris', AccountController.removeFavoris);
 router.post('/login', AccountController.login);
 router.post('/envoyerMail', AccountController.sendMail);
+router.get('/protected',verifyToken , (req, res) => {
+    res.json({ message: 'Cette route est protégée.' });
+  });
 
 module.exports = router;

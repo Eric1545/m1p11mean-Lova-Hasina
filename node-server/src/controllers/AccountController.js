@@ -2,6 +2,7 @@ const { Request, Response } = require('express');
 const AccountService = require('../services/AccountService');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const { createToken } = require('../middleware/auth');
 
 class AccountController {
   async getAccount(req, res) {
@@ -54,7 +55,7 @@ class AccountController {
       console.log(result)
       if (result.length >0){
         const {username} = postData
-        const token = jwt.sign({username},config.privateKey)
+        const token = createToken()
         res.json({ login: true,token });
       } else{
         res.json({ login:false });

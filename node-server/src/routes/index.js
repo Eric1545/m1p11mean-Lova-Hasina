@@ -1,4 +1,3 @@
-// src/routes/index.js
 const express = require('express');
 const exampleRoutes = require('./exampleRoutes');
 const accountRoutes = require('./accountRoutes');
