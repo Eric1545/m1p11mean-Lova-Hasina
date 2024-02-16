@@ -36,4 +36,7 @@ export class InscriptionComponent implements OnInit {
       this.authService.creationUserClient(dataUpdated)
     }
   }
+  handleFileUpload(file: File){
+    console.log(file,'ito e')
+  }
 }

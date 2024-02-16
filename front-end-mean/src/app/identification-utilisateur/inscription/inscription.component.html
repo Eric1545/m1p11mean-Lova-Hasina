@@ -17,13 +17,15 @@
 
                 <div class="card-body">
 
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Créer un compte</h5>
+                  <!-- <div class="pt-4 pb-2"> -->
+                    <!-- <h5 class="card-title text-center pb-0 fs-4">Créer un compte</h5> -->
                     <!-- <p class="text-center small">Enter your personal details to create account</p> -->
-                  </div>
+                  <!-- </div> -->
 
                   <form class="row g-3 needs-validation" novalidate #f="ngForm"
                   (ngSubmit)="f.form.valid && onSubmit()">
+                  
+                    <app-drag-and-drop (fileUploaded)="handleFileUpload($event)"></app-drag-and-drop>
                     <div class="col-12">
                         <label for="yourName" class="form-label">Nom</label>
                         <input type="text" name="name" class="form-control" id="yourName"  ngModel required [(ngModel)]="form.nom" #nom="ngModel">
@@ -76,7 +78,6 @@
                       <p class="small mb-0">J'ai déjà un compte? <a href="login">Se connecter</a></p>
                     </div>
                   </form>
-
                 </div>
               </div>
             </div>

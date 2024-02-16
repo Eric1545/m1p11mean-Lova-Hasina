@@ -1,0 +1,10 @@
+<label class="drop-zone" 
+       (drop)="onDrop($event)" 
+       (dragover)="onDragOver($event)" 
+       (dragleave)="onDragLeave($event)">
+    <input type="file" 
+           (change)="onFileSelected($event)" 
+           accept="image/*" 
+           style="display: none;">
+    <p>Glissez et déposez une image ici<br>ou cliquez pour sélectionner un fichier</p>
+</label>

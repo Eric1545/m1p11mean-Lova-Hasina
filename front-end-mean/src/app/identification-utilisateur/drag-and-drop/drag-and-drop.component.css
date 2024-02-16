@@ -1,0 +1,22 @@
+.drop-zone {
+    border: 2px dashed #cccccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    display: inline-block; /* Permet à la zone de dépôt de s'adapter à la taille du contenu */
+  }
+  
+  .drop-zone.drag-over {
+    border-color: #2196f3; /* Change la couleur pour indiquer le survol */
+  }
+  
+  .drop-zone p {
+    margin: 0;
+  }
+  
+  input[type="file"] {
+    display: none; /* Masque l'élément file input */
+  }
+  

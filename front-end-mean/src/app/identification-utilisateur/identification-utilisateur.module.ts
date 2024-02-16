@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    DragAndDropComponent
   ],
   imports: [
     CommonModule,
