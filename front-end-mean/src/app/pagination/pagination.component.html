@@ -1,0 +1,8 @@
+<div class="pagination justify-content-center">
+    <button class="btn btn-primary" (click)="prevPage()">Previous</button>
+    <ng-container *ngFor="let page of getPages()">
+      <button *ngIf="page !== -1; else ellipsis" class="btn btn-primary" [class.btn-dark]="page === currentPage" (click)="goToPage(page)">{{ page }}</button>
+      <ng-template #ellipsis>...</ng-template>
+    </ng-container>
+    <button class="btn btn-primary" (click)="nextPage()">Next</button>
+  </div>

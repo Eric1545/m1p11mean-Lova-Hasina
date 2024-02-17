@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HistoriqueComponent } from './historique/historique.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TemplateComponent } from '../template/template.component';
 import { EmployeFavorisComponent } from './employe-favoris/employe-favoris.component';
 import { ListeProduitComponent } from './liste-produit/liste-produit.component';
+import localeFr from '@angular/common/locales/fr';
+import { PaginationComponent } from '../pagination/pagination.component';
 
 const routes: Routes = [
   {
@@ -29,11 +31,13 @@ const routes: Routes = [
   }, 
 ];
 
+registerLocaleData(localeFr);
 @NgModule({
   declarations: [
     HistoriqueComponent,
     EmployeFavorisComponent,
-    ListeProduitComponent
+    ListeProduitComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,

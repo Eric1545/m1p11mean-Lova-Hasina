@@ -14,6 +14,7 @@ import { NavbarComponent } from './template/navbar/navbar.component';
 import { SidebarComponent } from './template/sidebar/sidebar.component';
 import {NgOptimizedImage} from "@angular/common";
 import { ClientModule } from './client/client.module';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ClientModule } from './client/client.module';
     ContainerComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

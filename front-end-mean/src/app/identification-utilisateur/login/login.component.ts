@@ -16,14 +16,14 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
     if(this.authService.getToken()){
-      this.router.navigate(['/liste-utilisateur'])
+      this.router.navigate(['/historique'])
     }
   }
   onSubmit(): void{
     this.authService.login(this.form.email,this.form.password).then((res:any)=>{
       console.log(res.data)
       if(res.data.login){
-        this.router.navigate(['/liste-utilisateur'])
+        this.router.navigate(['/historique'])
         this.authService.storeToken(res.data.token)
       }
     })
