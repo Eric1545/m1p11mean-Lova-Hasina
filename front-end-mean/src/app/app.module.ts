@@ -13,6 +13,7 @@ import { FooterComponent } from './template/footer/footer.component';
 import { NavbarComponent } from './template/navbar/navbar.component';
 import { SidebarComponent } from './template/sidebar/sidebar.component';
 import {NgOptimizedImage} from "@angular/common";
+import { ClientModule } from './client/client.module';
 
 @NgModule({
   declarations: [
@@ -28,10 +29,10 @@ import {NgOptimizedImage} from "@angular/common";
     BrowserModule,
     UtilisateurModule,
     IdentificationUtilisateurModule,
+    ClientModule,
     MatPaginatorModule,
-    AppRoutingModule,
     NgOptimizedImage,
-//ito atao farany foana
+    AppRoutingModule,//ito atao farany foana
   ],
   providers: [],
   bootstrap: [AppComponent]
