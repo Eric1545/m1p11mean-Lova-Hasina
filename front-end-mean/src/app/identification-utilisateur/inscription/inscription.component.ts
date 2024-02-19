@@ -16,6 +16,8 @@ export class InscriptionComponent implements OnInit {
     password:null,
     confirmPassword:null
   }
+  loading: boolean = false
+  messageError:string = ""
   constructor(private router:Router,private authService:AuthService){
   }
   ngOnInit(): void {
@@ -26,6 +28,7 @@ export class InscriptionComponent implements OnInit {
 
   onSubmit(): void{
     if(this.form.confirmPassword !== '' && this.form.confirmPassword === this.form.password) {
+      this.loading = true
       const dataUpdated = {
         ...this.form,
         heure_debut: new Date(),
@@ -33,10 +36,17 @@ export class InscriptionComponent implements OnInit {
       }
        delete dataUpdated.confirmPassword;
        console.log(dataUpdated)
-      this.authService.creationUserClient(dataUpdated)
+      
+      this.authService.creationUserClient(dataUpdated).then((res:any)=>{
+        this.loading = false
+        this.router.navigate(['/historique'])
+      })
+    } else {
+      this.messageError = "Vérifier votre mot de passe"
     }
   }
   handleFileUpload(file: File){
-    console.log(file,'ito e')
+    console.log(file.name,'ito e')
+    this.form.image_url = file.name
   }
 }
