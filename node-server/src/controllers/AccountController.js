@@ -55,7 +55,7 @@ class AccountController {
       console.log(result)
       if (result.length >0){
         const {username} = postData
-        const token = createToken()
+        const token = createToken(username)
         res.json({ login: true,token });
       } else{
         res.json({ login:false });

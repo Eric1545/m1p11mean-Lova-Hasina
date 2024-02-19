@@ -7,9 +7,4 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'front-end-mean';
-  constructor(private router: Router) { }
-  isLoginPage(): boolean {
-    return this.router.url.endsWith('/login');
-  }
 }

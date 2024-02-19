@@ -19,8 +19,11 @@ function verifyToken(req, res, next) {
 function createToken(username) {
   return jwt.sign({ username }, config.privateKey, { expiresIn: '1h' }); //eto le validité an le token 
 }
-
+function createTokenLien(username){
+  return jwt.sign({ username }, config.privateKey, {expiresIn: '5m'})
+}
 module.exports = {
     verifyToken,
-    createToken
+    createToken,
+    createTokenLien
 };

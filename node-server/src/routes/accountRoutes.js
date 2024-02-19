@@ -13,5 +13,9 @@ router.post('/mdpoublie', AccountController.sendMailForgotMdp);
 router.get('/protected',verifyToken , (req, res) => {
     res.json({ message: 'Cette route est protégée.' });
   });
+router.post('/reinitilaserMdp', verifyToken,(req, res) => {
+  console.log(req.username)
+  res.json({ message: 'Cette route est protégée.' });
+});
 
 module.exports = router;

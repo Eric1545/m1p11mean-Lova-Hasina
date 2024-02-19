@@ -1,6 +1,7 @@
 
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
+const { createTokenLien } = require('../middleware/auth');
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -34,7 +35,9 @@ async function envoyerEmail(destinataire, sujet, contenu) {
 }
 
 async function envoyerForgotPassword(mail){
-  const resetPasswordLink = "google.com"
+  
+  const token = createTokenLien(mail)
+  const resetPasswordLink = `${config.reinitilaiserMdp}/reinitilaserMdp/${token}`
   try {
     const mailOptions = {
       from: config.mail,

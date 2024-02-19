@@ -8,4 +8,5 @@ module.exports = {
     privateKey: process.env.PRIVATEKEY,
     mail: process.env.MAIL,
     mailpassword: process.env.MAILPASSWORD,
+    reinitilaiserMdp: process.env.REINITIALISERMDP
 };
