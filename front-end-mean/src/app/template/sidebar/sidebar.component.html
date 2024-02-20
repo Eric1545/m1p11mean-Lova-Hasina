@@ -41,17 +41,25 @@
         <li class="nav-header">EXAMPLES</li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fa-envelope"></i>
+            <i class="nav-icon fas fa-cogs"></i>
             <p>
-              Mailbox
+              Services
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inbox</p>
+              <a routerLink="/service/liste" class="nav-link" routerLinkActive="active">
+                <i class="fas fa-list-ul nav-icon"></i>
+                <p>Liste</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/service/ajouter" class="nav-link" routerLinkActive="active">
+                <i class="fas fa-plus nav-icon"></i>
+                <p>Ajouter</p>
               </a>
             </li>
           </ul>

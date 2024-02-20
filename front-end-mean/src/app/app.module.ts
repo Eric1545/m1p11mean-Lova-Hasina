@@ -15,6 +15,9 @@ import { SidebarComponent } from './template/sidebar/sidebar.component';
 import {NgOptimizedImage} from "@angular/common";
 import { ClientModule } from './client/client.module';
 import { PaginationComponent } from './pagination/pagination.component';
+import {ListeServicesComponent} from "./pages/services/liste-services/liste-services.component";
+import {ServicesModule} from "./pages/services/services.module";
+import {DataTablesModule} from "angular-datatables"
 
 @NgModule({
   declarations: [
@@ -24,7 +27,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     ContainerComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     ClientModule,
     MatPaginatorModule,
     NgOptimizedImage,
+    ServicesModule,
+    DataTablesModule,
     AppRoutingModule,//ito atao farany foana
   ],
   providers: [],
