@@ -12,7 +12,7 @@ lerna-debug.log*
 
 # Back-end dependencies
 /node-server/node_modules/
-/node-server/src/d41d8cd9.egit nv
+.env
 
 # VSCode
 /front-end-mean/.vscode
