@@ -64,6 +64,18 @@ async function login(username, password){
     throw error
   }
 }
+
+async function reinitilaserMdp(email, password){
+  try{
+    const utilisateur = await AccountModel.findOneAndUpdate({email:email}, {password:password}, {
+      new: true
+    });
+    return utilisateur
+  } catch(error){
+    console.log(error)
+    throw error
+  }
+}
 async function sendMailToUser(email, subject, content){
   try{
     await envoyerEmail(email, subject, content)
@@ -88,4 +100,5 @@ module.exports = {
   login,
   sendMailToUser,
   sendMailForgotMdp,
+  reinitilaserMdp,
 };

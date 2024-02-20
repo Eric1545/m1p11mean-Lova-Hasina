@@ -40,4 +40,25 @@ export class AuthService {
       return null
     }
   }
+  async envoyerMailReinitialisation(email: string) {
+    axios .post(`${this.url}/api/account/mdpoublie`, {email})
+  }
+  async reinitialiserMotDePasse(token: string,mdp: string) {
+    console.log(token);
+    try {
+      return await axios.post(
+        `${this.url}/api/account/reinitilaserMdp`, 
+        {mdp}, 
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      );
+    } catch (err) {
+      return null;
+    }
+  }
+  
+
 }
