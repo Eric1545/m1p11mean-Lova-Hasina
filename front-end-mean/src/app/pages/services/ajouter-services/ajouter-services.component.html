@@ -1,0 +1,114 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1 class="m-0">Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard v1</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Ajouter un nouveau service</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+
+          <!--<form class="row g-3 needs-validation" novalidate #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+            <div class="col-12">
+              <label for="yourName" class="form-label">Nom</label>
+              <input type="text" name="name" class="form-control" id="yourName" ngModel required
+                     [(ngModel)]="form.nom" #nom="ngModel">
+              <div class="invalid-feedback">Entrer votre nom</div>
+            </div>
+            <div class="col-12">
+              <label for="yourName" class="form-label">Prix</label>
+              <input type="text" name="prix" class="form-control" id="yourName" ngModel required
+                     [(ngModel)]="form.prix" #prix="ngModel">
+              <div class="invalid-feedback">Entrer votre prix</div>
+            </div>
+
+            <div class="col-12">
+              <label for="yourEmail" class="form-label">Duree</label>
+              <input type="email" name="duree" class="form-control" id="yourEmail" ngModel required
+                     [(ngModel)]="form.duree_minute" #duree="ngModel">
+              <div class="invalid-feedback">Entrer votre duree</div>
+            </div>
+
+            <div class="col-12">
+              <label for="yourUsername" class="form-label">commission</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                <input type="text" name="commission" class="form-control" id="yourUsername" ngModel required
+                       [(ngModel)]="form.commission" #commission="ngModel">
+                <div class="invalid-feedback">Entrer votre commission.</div>
+              </div>
+            </div>
+
+&lt;!&ndash;            <div class="col-12">&ndash;&gt;
+&lt;!&ndash;              <p class="small mb-0 text-danger">{{messageError}} </p>&ndash;&gt;
+&lt;!&ndash;            </div>&ndash;&gt;
+&lt;!&ndash;            &ndash;&gt;
+            <div class="col-12 mt-3">
+              <button class="btn btn-primary w-100" type="submit">
+                Créer un compte
+              </button>
+            </div>
+          </form>-->
+
+
+
+          <form novalidate #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" name="nom" class="form-control" ngModel required [(ngModel)]="form.nom" #nom="ngModel">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Prix</label>
+                  <input type="number" step="0.01" name="prix" class="form-control" ngModel required [(ngModel)]="form.prix" #prix="ngModel">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- textarea -->
+                <div class="form-group">
+                  <label>Durée</label>
+                  <input type="number" step="0.01" name="duree" class="form-control" ngModel required [(ngModel)]="form.duree" #duree="ngModel">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Commission</label>
+                  <input type="number" step="0.01" name="commission" class="form-control" ngModel required [(ngModel)]="form.commission" #commission="ngModel">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+          </form>
+        </div>
+        <!-- /.card-body -->
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Main content -->
