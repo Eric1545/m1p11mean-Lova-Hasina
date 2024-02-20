@@ -61,8 +61,10 @@
                         Login
                       </button>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 d-flex flex-row justify-content-between">
                       <p class="small mb-0"><a href="inscription">Créer un compte</a></p>
+                      
+                      <p class="small mb-0"><a type="button" data-toggle="modal" data-target="#exampleModalScrollable">Mot de passe oublié</a></p>
                     </div>
                   </form>
 
@@ -72,7 +74,43 @@
             </div>
           </div>
         </div>
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Lien pour réinitialiser votre mot de passe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form 
+              #mailSend="ngForm"
+                    (ngSubmit)="mailSend.form.valid && envoyerMailReinitialisation()">
+                <div class="modal-body">
+                  <div class="col-12">
+                    <label for="yourUsername" class="form-label">Mail</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      <input type="text" name="username" class="form-control" id="yourUsername" ngModel required [(ngModel)]="mail" #email="ngModel">
+                      <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0 text-danger">{{messageMail}} </p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-primary">
+                    <span class="spinner-border spinner-border-sm" *ngIf="loadingSendMail"></span>
+                    Envoyer un mail
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
 
     </div>

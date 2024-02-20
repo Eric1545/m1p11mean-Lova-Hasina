@@ -12,8 +12,11 @@ export class LoginComponent implements OnInit {
     email:null,
     password:null
   }
+  mail: string|null = null
   messageErreur: string = "" 
+  messageMail: string = ""
   loading: boolean = false
+  loadingSendMail: boolean = false
   constructor(private router:Router,private authService:AuthService){
   }
   ngOnInit(): void {
@@ -34,4 +37,17 @@ export class LoginComponent implements OnInit {
       this.loading = false
     })
   }
+  envoyerMailReinitialisation(){
+    if(this.mail){
+      this.loadingSendMail=true
+      this.authService.envoyerMailReinitialisation(this.mail).then((res:any)=>{
+        this.loadingSendMail=false
+        this.messageMail = "Un mail de réinitialisation de mot de passe vous a été envoyé"
+      }).catch((err:any)=>{
+        this.loadingSendMail=false
+        this.messageMail = "Votre mail n'existe pas dans notre base de données ou une erreur s'est produite"
+      })
+    }
+  }
+
 }

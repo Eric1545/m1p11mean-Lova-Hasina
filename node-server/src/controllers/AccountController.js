@@ -85,6 +85,16 @@ class AccountController {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }
+  async reinitilaserMdp(req, res){
+    const postData = req.body
+    try{
+      const result = await AccountService.reinitilaserMdp(req.username,postData.mdp);
+      res.json({ message: 'POST request successful', result });
+    } catch(error){
+      console.error('error')
+      res.status(500).json({ message : 'Internal Server Error' });
+    }
+  }
 }
 
 module.exports = new AccountController();
