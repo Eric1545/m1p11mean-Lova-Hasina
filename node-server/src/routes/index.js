@@ -14,4 +14,11 @@ router.use('/service', serviceRoutes);
 router.use('/role', roleRoutes);
 router.use('/rendezVous', rendezVousRoutes);
 router.post('/upload', handleFileUpload);
+router.post('/emitEvent', (req, res) => {
+    const io = req.app.get('socketio');
+    io.emit('chat', { message: 'Ceci est un test de socket.io depuis une route.',handle:"zao ihany" });
+
+    res.json({ message: 'Événement émis avec succès.' });
+});
+
 module.exports = router;

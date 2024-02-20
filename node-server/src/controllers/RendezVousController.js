@@ -4,8 +4,8 @@ class RendezVousController {
   async getRendezVous(req, res) {
     const params = req.params;
     try {
-      const data = await getRendezVous(params.pageNumber,params.pageSize);
-      const nombreRendezVous = await count()
+      const data = await getRendezVous(params.pageNumber,params.pageSize,params.id);
+      const nombreRendezVous = await count(params.id)
       const nombrePage = Math.ceil(nombreRendezVous/params.pageSize)
       res.json({ message: 'GET request successful', data, nombrePage});
     } catch (error) {

@@ -12,13 +12,18 @@ export class AuthService {
   storeToken(token: string) {
     this.cookieService.set('authToken', token);
   }
-
+  storeId(id:string) {
+    this.cookieService.set("id",id);
+  }
   getToken() {
     return this.cookieService.get('authToken');
   }
-
+  getId(){
+    return this.cookieService.get('id');
+  }
   clearToken() {
     this.cookieService.delete('authToken');
+    this.cookieService.delete('id');
   }
   
   async login(username:string,password:string){

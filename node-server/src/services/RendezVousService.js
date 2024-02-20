@@ -2,10 +2,10 @@ const AccountModel = require("../models/AccountModel");
 const RendezVousModel = require("../models/RendezVousModel");
 const ServiceModel = require("../models/ServiceModel");
 
-async function getRendezVous(pageNumber, pageSize) {
+async function getRendezVous(pageNumber, pageSize, id) {
     try {
         const skip = (pageNumber - 1) * pageSize;
-        const rendezVous = await RendezVousModel.find()
+        const rendezVous = await RendezVousModel.find({client_id:id})
             .populate({ path: 'client_id', model: AccountModel })
             .populate({ path: 'employe_id', model: AccountModel })
             .populate({ path: 'service_id', model: ServiceModel })
@@ -17,9 +17,9 @@ async function getRendezVous(pageNumber, pageSize) {
         throw error;
     }
 }
-async function count(){
+async function count(id){
     try {
-        const count = await RendezVousModel.countDocuments();
+        const count = await RendezVousModel.countDocuments({client_id:id});
         return count;
     } catch (error) {
         console.error('Error fetching data from database:', error);

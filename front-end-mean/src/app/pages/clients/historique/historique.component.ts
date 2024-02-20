@@ -26,7 +26,7 @@ export class HistoriqueComponent implements OnInit {
   }
   loadRendezVous(pageNumber: number, pageSize: number): void {
     this.loading = true
-    this.rendezVousService.getRendezVous(pageNumber, pageSize).then((response) => {
+    this.rendezVousService.getRendezVous(this.authService.getId(),pageNumber, pageSize).then((response) => {
       this.listeHistoriqueRendezVous = response.data.data;
       this.totalItems = response.data.nombrePage; 
       this.loading = false
