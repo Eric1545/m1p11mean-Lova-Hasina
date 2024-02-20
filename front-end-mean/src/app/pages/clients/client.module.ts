@@ -2,29 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { HistoriqueComponent } from './historique/historique.component';
 import { RouterModule, Routes } from '@angular/router';
-import { TemplateComponent } from '../template/template.component';
+import { TemplateComponent } from '../../template/template.component';
 import { EmployeFavorisComponent } from './employe-favoris/employe-favoris.component';
 import { ListeProduitComponent } from './liste-produit/liste-produit.component';
 import localeFr from '@angular/common/locales/fr';
-import { PaginationComponent } from '../pagination/pagination.component';
+import { PaginationComponent } from '../../pagination/pagination.component';
 
 const routes: Routes = [
   {
-    path: 'historique',
+    path: 'client',
     component: TemplateComponent,
     children: [
       {
-        path: '',
+        path: 'historique',
         component: HistoriqueComponent
-      }
-    ]
-  }, 
-  {
-    path: 'listeproduit',
-    component: TemplateComponent,
-    children: [
+      },
+      
       {
-        path: '',
+        path: 'listeProduit',
         component: ListeProduitComponent
       }
     ]

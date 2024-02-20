@@ -13,11 +13,11 @@ import { FooterComponent } from './template/footer/footer.component';
 import { NavbarComponent } from './template/navbar/navbar.component';
 import { SidebarComponent } from './template/sidebar/sidebar.component';
 import {NgOptimizedImage} from "@angular/common";
-import { ClientModule } from './client/client.module';
 import { PaginationComponent } from './pagination/pagination.component';
 import {ListeServicesComponent} from "./pages/services/liste-services/liste-services.component";
 import {ServicesModule} from "./pages/services/services.module";
 import {DataTablesModule} from "angular-datatables"
+import { ClientModule } from './pages/clients/client.module';
 
 @NgModule({
   declarations: [

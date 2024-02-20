@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
     if(this.authService.getToken()){
-      this.router.navigate(['/historique'])
+      this.router.navigate(['/client/historique'])
     }
   }
   onSubmit(): void{
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.form.email,this.form.password).then((res:any)=>{
       console.log(res.data)
       if(res.data.login){
-        this.router.navigate(['/historique'])
+        this.router.navigate(['/client/historique'])
         this.authService.storeToken(res.data.token)
       } else {
         this.messageErreur = "Vérifier votre user ou votre mot de passe"
