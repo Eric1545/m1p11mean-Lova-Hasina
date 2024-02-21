@@ -14,16 +14,19 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    InscriptionComponent,
-    DragAndDropComponent,
-    ReinitialiserComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    FormsModule,
-  ]
+    declarations: [
+        LoginComponent,
+        InscriptionComponent,
+        DragAndDropComponent,
+        ReinitialiserComponent
+    ],
+    exports: [
+        DragAndDropComponent
+    ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule,
+    ]
 })
 export class IdentificationUtilisateurModule { }

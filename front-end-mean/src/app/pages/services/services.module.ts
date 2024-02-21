@@ -6,6 +6,8 @@ import {TemplateComponent} from "../../template/template.component";
 import {DataTablesModule} from "angular-datatables";
 import { AjouterServicesComponent } from './ajouter-services/ajouter-services.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {IdentificationUtilisateurModule} from "../../identification-utilisateur/identification-utilisateur.module";
+import { ModifierServicesComponent } from './modifier-services/modifier-services.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,10 @@ const routes: Routes = [
       {
         path: 'ajouter',
         component: AjouterServicesComponent
+      },
+      {
+        path: 'modifier/:id',
+        component: ModifierServicesComponent
       }
     ]
   },
@@ -29,6 +35,7 @@ const routes: Routes = [
   declarations: [
     ListeServicesComponent,
     AjouterServicesComponent,
+    ModifierServicesComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +43,7 @@ const routes: Routes = [
     DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
+    IdentificationUtilisateurModule,
   ]
 })
 export class ServicesModule { }

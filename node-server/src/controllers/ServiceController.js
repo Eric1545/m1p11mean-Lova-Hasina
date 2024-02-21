@@ -1,4 +1,4 @@
-const { getService, createService } = require("../services/ServiceService");
+const { getService, createService, modifierService, supprimerService, obtenirServiceParId} = require("../services/ServiceService");
 
 
 class ServiceController {
@@ -22,6 +22,42 @@ class ServiceController {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }
+
+  async modifierService(req, res) {
+    const id = req.params;
+    const donneesModifiees = req.body;
+
+    try {
+      const serviceModifie = await modifierService(id, donneesModifiees);
+      res.json({ message: 'Service modifié avec succès', serviceModifie });
+    } catch (erreur) {
+      console.error('Erreur lors de la modification du service :', erreur);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async supprimerService(req, res) {
+    const id = req.params;
+    try {
+      const messageSuppression = await supprimerService(id);
+      res.json({ message: messageSuppression });
+    } catch (erreur) {
+      console.error('Erreur lors de la suppression du service :', erreur);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async obtenirServiceParId(req, res) {
+    const id = req.params;
+    try {
+      const data = await obtenirServiceParId(id);
+      res.json({ message: 'GET request successful', data });
+    } catch (erreur) {
+      console.error('Erreur lors de la suppression du service :', erreur);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
 }
 
 module.exports = new ServiceController();

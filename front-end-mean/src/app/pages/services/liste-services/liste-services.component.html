@@ -35,6 +35,7 @@
               <th>Prix</th>
               <th>Durée</th>
               <th>Commission</th>
+              <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -43,16 +44,13 @@
               <td>{{item.prix}}</td>
               <td>{{item.duree}}</td>
               <td>{{item.commission}}</td>
+              <td style="width: 18%">
+<!--                <a class="btn btn-warning ml-auto" routerLink="modifier/{{item.id}}">Modifier</a> |-->
+                <button (click)="redirectModification(item._id)" class="btn btn-warning ml-auto">Modifier</button> |
+                <button (click)="supprimerService(item._id)" class="btn btn-danger ml-auto">Supprimer</button>
+              </td>
             </tr>
             </tbody>
-            <tfoot>
-            <tr>
-              <th>Nom</th>
-              <th>Prix</th>
-              <th>Durée</th>
-              <th>Commission</th>
-            </tr>
-            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->

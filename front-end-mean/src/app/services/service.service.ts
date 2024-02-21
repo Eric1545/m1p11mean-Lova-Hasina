@@ -1,31 +1,61 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import {environment} from "../../environments/environment";
-
-const URL_BASE = environment.host + '/service';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
 
-  async getAllService(){
-    console.log(URL_BASE);
-    return axios.get(`${URL_BASE}`)
-  }
+  private apiUrl = environment.host + '/service';
 
-
-  async createService(data:any){
+  async ajouterService(nouveauService: any){
     try {
-      console.log("=================")
-      console.log(data);
-      console.log(URL_BASE);
-      console.log("=================")
-      return await axios.post(`${URL_BASE}`, data).then();
-    }
-    catch(err){
-      return null
+      const response = await axios.post(this.apiUrl, nouveauService);
+      return response.data;
+    } catch (error) {
+      throw error;
     }
   }
 
+  async obtenirServices(): Promise<any[]>  {
+    try {
+      const response = await axios.get(this.apiUrl);
+      console.log(response.data.data)
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async obtenirServiceParId(id: any): Promise<any> {
+    try {
+      console.log("===================")
+      console.log(id)
+      console.log("===================")
+      const response = await axios.get(`${this.apiUrl}/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async mettreAJourService(serviceModifie: any): Promise<any> {
+    try {
+      const response = await axios.put(`${this.apiUrl}/${serviceModifie._id}`, serviceModifie);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async supprimerService(id: any): Promise<any> {
+    try {
+      const response = await axios.delete(`${this.apiUrl}/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
