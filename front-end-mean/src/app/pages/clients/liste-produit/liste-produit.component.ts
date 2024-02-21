@@ -17,7 +17,7 @@ export class ListeProduitComponent {
   constructor(private webSocketService: SocketService) { }
   ngOnInit(): void {
     this.webSocketService.listen('typing').subscribe((data) => this.updateFeedback(data));
-    this.webSocketService.listen('chat').subscribe((data) => this.updateMessage(data));
+    this.webSocketService.listen('rappel').subscribe((data) => this.updateMessage(data));
   }
 
   messageTyping(): void {
@@ -33,10 +33,11 @@ export class ListeProduitComponent {
   }
 
   updateMessage(data:any) {
-    this.feedback = '';
-    if(!!!data) return;
-    console.log(`${data.handle} : ${data.message}`);
-    this.output.push(data);
+    // this.feedback = '';
+    // if(!!!data) return;
+    // console.log(`${data.handle} : ${data.message}`);
+    // this.output.push(data);
+    console.log('rappele')
   }
 
   updateFeedback(data: any){
