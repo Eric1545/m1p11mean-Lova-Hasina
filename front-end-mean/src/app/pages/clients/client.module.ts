@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { AjouterProduitFavorisComponent } from './ajouter-produit-favoris/ajouter-produit-favoris.component';
 import { ListeProduitFavorisComponent } from './liste-produit-favoris/liste-produit-favoris.component';
 import { ListeEmployeFavorisComponent } from './liste-employe-favoris/liste-employe-favoris.component';
+import { NotificationComponent } from './notification/notification.component';
+import { DetailNotificationComponent } from './detail-notification/detail-notification.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,14 @@ const routes: Routes = [
         path: 'listeEmployeFavoris',
         component: ListeEmployeFavorisComponent
       },
+      {
+        path: 'notification',
+        component: NotificationComponent
+      },
+      {
+        path: 'detailNotification/:type/:id',
+        component: DetailNotificationComponent
+      },
     ]
   }, 
 ];
@@ -50,7 +60,9 @@ registerLocaleData(localeFr);
     PaginationComponent,
     AjouterProduitFavorisComponent,
     ListeProduitFavorisComponent,
-    ListeEmployeFavorisComponent
+    ListeEmployeFavorisComponent,
+    NotificationComponent,
+    DetailNotificationComponent
   ],
   imports: [
     CommonModule,

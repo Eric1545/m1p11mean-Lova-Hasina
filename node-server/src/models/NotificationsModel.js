@@ -7,6 +7,7 @@ const notifiationSchema = new mongoose.Schema({
   lu: { type: Boolean, default: false },
   type: { type: String, required: true },
   id: { type: Schema.Types.ObjectId, required: true },
+  date_insertion:{type:Date, default: mongoose.now}
 });
 
 const NotificationsModel = mongoose.model('notifications', notifiationSchema);

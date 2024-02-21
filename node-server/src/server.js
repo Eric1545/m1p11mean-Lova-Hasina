@@ -31,10 +31,10 @@ app.set('socketio', io);
 
 cron.schedule('*/2 * * * *', () => {
   console.log('rappel 2')
-  io.emit('rappel', 'Rappel de rendez-vous dans 2 minutes !');
+  // io.emit('rappel', 'Rappel de rendez-vous dans 2 minutes !');
 });
 
 cron.schedule('*/1 * * * *', () => {
   console.log('rappel 1')
-  io.emit('rappel', 'Rappel de rendez-vous dans 2 minutes !');
+  // io.emit('rappel', 'Rappel de rendez-vous dans 2 minutes !');
 });
