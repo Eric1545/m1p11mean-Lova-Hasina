@@ -48,8 +48,10 @@
       <div class="d-flex justify-content-center align-items-center" *ngIf="loading" style="height: 300px;">
         <span class="spinner-border spinner-border-lg"></span>
       </div>
-      <app-pagination [currentPage]="pageNumber" [totalPages]="totalItems" (pageChange)="onPageChange($event)">
-      </app-pagination>
+      <div *ngIf="listeHistoriqueRendezVous.length > 0">
+        <app-pagination [currentPage]="pageNumber" [totalPages]="totalItems" (pageChange)="onPageChange($event)">
+        </app-pagination>
+      </div>
 
     </div>
   </section>

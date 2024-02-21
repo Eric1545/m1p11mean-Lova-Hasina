@@ -6,8 +6,8 @@ import axios from 'axios';
 })
 export class RendezVousService {
   url = 'http://localhost:3000';
-  getRendezVous(pageNumber: number,pageSize:number){
-    return axios.get(`${this.url}/api/rendezVous/getRendezVous/${pageNumber}/${pageSize}`)
+  getRendezVous(id: string,pageNumber: number,pageSize:number){
+    return axios.get(`${this.url}/api/rendezVous/getRendezVous/${id}/${pageNumber}/${pageSize}`)
   }
 
 }

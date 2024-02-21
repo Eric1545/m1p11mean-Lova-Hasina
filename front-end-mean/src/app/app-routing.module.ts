@@ -15,7 +15,7 @@ const routes: Routes = [
       },
     ]
   },
-  {path: '', redirectTo: '/historique', pathMatch: 'full'},
+  {path: '', redirectTo: '/client/historique', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 

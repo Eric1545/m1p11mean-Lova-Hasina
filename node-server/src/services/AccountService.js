@@ -1,5 +1,6 @@
 const AccountModel = require("../models/AccountModel");
 const RoleModel = require('../models/RoleModel');
+const ServiceModel = require("../models/ServiceModel");
 const { envoyerEmail, envoyerForgotPassword } = require("../utils/mailer");
 
 async function getAccount(pageNumber, pageSize) {
@@ -11,6 +12,18 @@ async function getAccount(pageNumber, pageSize) {
       .populate({ path: 'role', model: RoleModel })
       .skip(skip)
       .limit(pageSize);
+    return accounts;
+  } catch (error) {
+    console.error('Error fetching data from database:', error);
+    throw error;
+  }
+}
+async function getUserById(id) {
+  try {
+    const accounts = await AccountModel.findOne({_id: id})
+      .populate({ path: 'role', model: RoleModel })
+      .populate({ path: 'service_favorite',model:ServiceModel})
+      .populate({ path : 'employe_fav', model:AccountModel})
     return accounts;
   } catch (error) {
     console.error('Error fetching data from database:', error);
@@ -40,12 +53,45 @@ async function addFavoris(idUtilisateur, idFavoris) {
     throw error
   }
 }
+
+async function addServiceFavoris(idUtilisateur, idFavoris) {
+  try {
+    const utilistateur = await AccountModel.findByIdAndUpdate(
+      idUtilisateur,
+      {
+        $addToSet: { service_favorite: idFavoris }
+      },
+      { new: true }
+    ).populate({ path: 'role', model: RoleModel })
+    return utilistateur
+  }
+  catch (error) {
+    console.error(error)
+    throw error
+  }
+}
 async function removeFavoris(idUtilisateur, idFavoris){
   try {
     const utilistateur = await AccountModel.findByIdAndUpdate(
       idUtilisateur,
       {
         $pull: {employe_fav: idFavoris}
+      },
+      { new: true }
+    ).populate({path: 'role', model: RoleModel })
+    return utilistateur
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
+async function removeServiceFavoris(idUtilisateur, idFavoris){
+  try {
+    const utilistateur = await AccountModel.findByIdAndUpdate(
+      idUtilisateur,
+      {
+        $pull: {service_favorite: idFavoris}
       },
       { new: true }
     ).populate({path: 'role', model: RoleModel })
@@ -101,4 +147,7 @@ module.exports = {
   sendMailToUser,
   sendMailForgotMdp,
   reinitilaserMdp,
+  addServiceFavoris,
+  removeServiceFavoris,
+  getUserById,
 };

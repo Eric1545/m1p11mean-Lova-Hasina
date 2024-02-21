@@ -22,7 +22,7 @@ export class InscriptionComponent implements OnInit {
   }
   ngOnInit(): void {
     if(this.authService.getToken()){
-      this.router.navigate(['/liste-utilisateur'])
+      this.router.navigate(['/client/historique'])
     }
   }
 
@@ -39,7 +39,7 @@ export class InscriptionComponent implements OnInit {
       
       this.authService.creationUserClient(dataUpdated).then((res:any)=>{
         this.loading = false
-        this.router.navigate(['/historique'])
+        this.router.navigate(['/client/historique'])
       })
     } else {
       this.messageError = "Vérifier votre mot de passe"

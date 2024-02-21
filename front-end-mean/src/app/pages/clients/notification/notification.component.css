@@ -1,0 +1,8 @@
+.notification {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-left: 5px solid #424446; /* Bordure grise par défaut */
+  }
+  .notification.unread {
+    border-left-color: blue; /* Bordure bleue pour les notifications non lues */
+  }
