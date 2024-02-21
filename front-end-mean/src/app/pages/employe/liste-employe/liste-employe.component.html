@@ -22,31 +22,31 @@
       <div class="card">
 
         <div class="card-header d-flex justify-content-between">
-          <h3 class="card-title">Liste des services</h3>
+          <h3 class="card-title">Liste des employés</h3>
           <a class="btn btn-success ml-auto" routerLink="../ajouter">Ajouter [+]</a>
         </div>
 
         <!-- /.card-header -->
         <div class="card-body">
-          <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="listeServiceTable" class="table table-bordered table-striped">
+          <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="listeEmployeTable" class="table table-bordered table-striped">
             <thead>
             <tr>
               <th>Nom</th>
-              <th>Prix</th>
-              <th>Durée</th>
-              <th>Commission</th>
+              <th>Prénom</th>
+              <th>Email</th>
+              <th>Username</th>
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of services">
+            <tr *ngFor="let item of employes">
               <td>{{item.nom}}</td>
-              <td>{{item.prix}}</td>
-              <td>{{item.duree}}</td>
-              <td>{{item.commission}}</td>
+              <td>{{item.prenom}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.username}}</td>
               <td style="width: 18%">
                 <button (click)="redirectModification(item._id)" class="btn btn-warning ml-auto">Modifier</button> |
-                <button (click)="supprimerService(item._id)" class="btn btn-danger ml-auto">Supprimer</button>
+                <button (click)="supprimerEmploye(item._id)" class="btn btn-danger ml-auto">Supprimer</button>
               </td>
             </tr>
             </tbody>

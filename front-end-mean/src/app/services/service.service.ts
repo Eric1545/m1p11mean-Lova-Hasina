@@ -31,9 +31,6 @@ export class ServiceService {
 
   async obtenirServiceParId(id: any): Promise<any> {
     try {
-      console.log("===================")
-      console.log(id)
-      console.log("===================")
       const response = await axios.get(`${this.apiUrl}/${id}`);
       return response.data;
     } catch (error) {

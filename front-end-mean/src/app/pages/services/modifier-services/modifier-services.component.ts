@@ -29,8 +29,6 @@ export class ModifierServicesComponent implements OnInit{
     try {
       const result = await this.serviceService.obtenirServiceParId(this.id);
       this.serviceModifie = result.data;
-      console.log("service debut")
-      console.log(this.serviceModifie)
     } catch (error) {
       console.error('Erreur lors de la récupération des services :', error);
     }
@@ -39,8 +37,6 @@ export class ModifierServicesComponent implements OnInit{
   async modifierService(): Promise<void> {
     try {
       const serviceModifie = await this.serviceService.mettreAJourService(this.serviceModifie);
-      console.log("service apres")
-      console.log(this.serviceModifie)
       await this.router.navigate(['/service/liste']);
     } catch (error) {
       console.error('Erreur lors de la modification du service :', error);

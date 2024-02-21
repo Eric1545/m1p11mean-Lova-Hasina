@@ -46,10 +46,6 @@ async function modifierService(idService, donneesModifiees) {
 
 async function supprimerService(idService) {
     try {
-        const service = await ServiceModel.find({_id: idService});
-        console.log(idService);
-        console.log(service);
-
         const result = await ServiceModel.deleteOne({ _id: idService });
 
         if (result.deletedCount === 0) {
@@ -57,13 +53,6 @@ async function supprimerService(idService) {
         }
 
         return 'Service supprimé avec succès';
-        /*const service = await ServiceModel.findById(idService);
-        console.log(service);
-        const serviceSupprime = await ServiceModel.findByIdAndDelete(idService);
-        if (!serviceSupprime) {
-            throw new Error('Service non trouvé');
-        }
-        return 'Service supprimé avec succès';*/
     } catch (erreur) {
         console.error('Erreur lors de la suppression du service :', erreur);
         throw erreur;

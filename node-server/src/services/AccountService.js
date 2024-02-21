@@ -2,6 +2,50 @@ const AccountModel = require("../models/AccountModel");
 const RoleModel = require('../models/RoleModel');
 const ServiceModel = require("../models/ServiceModel");
 const { envoyerEmail, envoyerForgotPassword } = require("../utils/mailer");
+const mongoose = require('mongoose');
+
+
+async function obtenirCompteParId(idCompte) {
+  try {
+    const compteObjectId = new mongoose.Types.ObjectId(idCompte);
+    const a = await AccountModel.findById(compteObjectId);
+    console.log(a)
+    return a;
+  } catch (error) {
+    console.error('Error fetching data from database:', error);
+    throw error;
+  }
+}
+
+async function modifierEmploye(idEmploye, donneesModifiees) {
+  try {
+    const employeModifie = await AccountModel.findByIdAndUpdate(idEmploye, donneesModifiees, { new: true });
+    if (!employeModifie) {
+      throw new Error('Employe non trouvé');
+    }
+    return employeModifie;
+  } catch (erreur) {
+    console.error('Erreur lors de la modification du employe :', erreur);
+    throw erreur;
+  }
+}
+
+async function supprimerEmploye(idEmploye) {
+  try {
+    const employeObjectId = new mongoose.Types.ObjectId(idEmploye);
+
+     const result = await AccountModel.deleteOne({ _id: employeObjectId });
+
+     if (result.deletedCount === 0) {
+         throw new Error('Employe non trouvé');
+     }
+
+     return 'Employe supprimé avec succès';
+  } catch (erreur) {
+    console.error('Erreur lors de la suppression du employe :', erreur);
+    throw erreur;
+  }
+}
 
 async function getAccount(pageNumber, pageSize) {
   try {
@@ -13,6 +57,20 @@ async function getAccount(pageNumber, pageSize) {
       .skip(skip)
       .limit(pageSize);
     return accounts;
+  } catch (error) {
+    console.error('Error fetching data from database:', error);
+    throw error;
+  }
+}
+
+async function obtenirCompteParRole(roleAChercher) {
+  try {
+    console.log(roleAChercher)
+    const role = await RoleModel.findOne({ role: roleAChercher });
+    console.log(role);
+    const response = await AccountModel.find({role: role._id});
+    console.log(response);
+    return response;
   } catch (error) {
     console.error('Error fetching data from database:', error);
     throw error;
@@ -139,6 +197,10 @@ async function sendMailForgotMdp ( email ){
   }
 }
 module.exports = {
+  modifierEmploye,
+  supprimerEmploye,
+  obtenirCompteParId,
+  obtenirCompteParRole,
   getAccount,
   createAccount,
   addFavoris,
