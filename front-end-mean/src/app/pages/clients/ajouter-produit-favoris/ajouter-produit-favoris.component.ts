@@ -16,14 +16,12 @@ export class AjouterProduitFavorisComponent implements OnInit {
     this.getService()
   } 
   getService(){
-    this.service.getAllService().then((response:any)=>{
-      console.log(response.data.data)
-      this.listeHistoriqueRendezVous = response.data.data
+    this.service.obtenirServices().then((response:any)=>{
+      this.listeHistoriqueRendezVous = response
     })
   }
   ajouterFavoris(idFavoris:string){
     this.account.ajouterServiceFavoris(this.auth.getId(),idFavoris).then((response: any)=>{
-      console.log("vita")
     })
   }
 }
