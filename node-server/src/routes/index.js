@@ -2,6 +2,7 @@ const express = require('express');
 const exampleRoutes = require('./exampleRoutes');
 const accountRoutes = require('./accountRoutes');
 const serviceRoutes = require('./serviceRoutes');
+const offreSpecialeRoutes = require('./offreSpecialeRoutes');
 const roleRoutes = require('./roleRoutes');
 const { handleFileUpload } = require('../controllers/FileController');
 const rendezVousRoutes = require('./rendezVousRoutes');
@@ -12,6 +13,7 @@ const router = express.Router();
 router.use('/example', exampleRoutes);
 router.use('/account', accountRoutes);
 router.use('/service', serviceRoutes);
+router.use('/offre_speciale', offreSpecialeRoutes);
 router.use('/role', roleRoutes);
 router.use('/rendezVous', rendezVousRoutes);
 router.use('/notification',notificationRoutes)
