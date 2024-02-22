@@ -28,7 +28,6 @@ var server = app.listen(PORT, () => {
 const io = initializeSocket(server);
 
 app.set('socketio', io);
-
 cron.schedule('*/2 * * * *', () => {
   console.log('rappel 2')
   // io.emit('rappel', 'Rappel de rendez-vous dans 2 minutes !');

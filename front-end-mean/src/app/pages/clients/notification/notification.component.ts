@@ -33,6 +33,7 @@ export class NotificationComponent implements OnInit{
     this.loading=true
     try{
       await this.notificationService.updateRead(idNotification)
+      this.webSocketService.emit('notification', {idNotification:idNotification})
       this.router.navigate([`/client/detailNotification/${type}/${idObjet}`])
       this.loading=false
     }catch(error){

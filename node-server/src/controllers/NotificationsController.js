@@ -1,4 +1,4 @@
-const { createNotification, getNotification, updateReadNotification } = require("../services/NotificationService");
+const { createNotification, getNotification, updateReadNotification, countNotification } = require("../services/NotificationService");
 
 class NotificationsController {
     async createNotification(req,res){
@@ -10,6 +10,16 @@ class NotificationsController {
             res.json({ message: 'POST request successful', result });
         } catch (error) {
             console.error('Error in postNotification:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+    async countNotification(req,res){
+        const idUtilisateur = req.params.idUtilisateur;
+        try {
+            const result = await countNotification(idUtilisateur);
+            res.json({ message: 'GET request successful', result });
+        } catch (error) {
+            console.error('Error in getNotification:', error);
             res.status(500).json({ message: 'Internal Server Error' });
         }
     }

@@ -15,4 +15,7 @@ export class NotificationService {
   async updateRead(idNotification:string){
     await axios.patch(`${this.url}/api/notification/updateRead/${idNotification}`)
   }
+  async countNotification(){
+    return axios.get(`${this.url}/api/notification/countNotification/${this.auth.getId()}`)
+  }
 }

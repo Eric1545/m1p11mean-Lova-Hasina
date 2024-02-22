@@ -16,6 +16,16 @@ async function getNotification(idUtilisateur){
         throw error;
     }
 }
+async function countNotification(idUtilisateur){
+    try {
+        const notifications = await NotificationsModel.countDocuments({utilisateur:idUtilisateur,lu:false})
+        return notifications
+    }
+    catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
 async function updateReadNotification(idNotification){
     try{
         const notification = await NotificationsModel.findOneAndUpdate({_id:idNotification}, {lu:true}, {
@@ -27,8 +37,10 @@ async function updateReadNotification(idNotification){
         throw error;
     }
 }
+
 module.exports = {
     createNotification,
     getNotification,
-    updateReadNotification
+    updateReadNotification,
+    countNotification
 };
