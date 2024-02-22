@@ -4,6 +4,10 @@ const { verifyToken } = require('../middleware/auth');
 const router = express.Router();
 const io = require('socket.io')()
 
+router.get('/:id', AccountController.obtenirCompteParId);
+router.delete('/:id', AccountController.supprimerEmploye);
+router.put('/:id', AccountController.modifierEmploye);
+router.get('/obtenirCompteParRole/:role', AccountController.obtenirCompteParRole);
 router.get('/getUtilisateur/:pageNumber/:pageSize', AccountController.getAccount);
 router.get('/getUtilisateurById/:id', AccountController.getUserById);
 router.post('/', AccountController.createAccount);

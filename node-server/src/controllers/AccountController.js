@@ -3,8 +3,57 @@ const AccountService = require('../services/AccountService');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const { createToken } = require('../middleware/auth');
+const {supprimerEmploye, obtenirCompteParId} = require("../services/AccountService");
 
 class AccountController {
+
+  async obtenirCompteParId(req, res) {
+    const id = req.params;
+    try {
+      const data = await obtenirCompteParId(id);
+      res.json({ message: 'GET request successful', data });
+    } catch (erreur) {
+      console.error('Erreur lors de la suppression du service :', erreur);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async supprimerEmploye(req, res) {
+    const id = req.params;
+    try {
+      const messageSuppression = await supprimerEmploye(id);
+      res.json({ message: messageSuppression });
+    } catch (erreur) {
+      console.error('Erreur lors de la suppression du service :', erreur);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async modifierEmploye(req, res) {
+    const compteModifier = req.body;
+    const params = req.params;
+    try {
+      const resultat = await AccountService.modifierEmploye(params.id, compteModifier);
+      res.json({ message: 'Employe modifié avec succès', resultat });
+    } catch (error) {
+      console.error('Erreur lors de la modification du service:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async obtenirCompteParRole(req, res) {
+    const params = req.params;
+    console.log(params)
+    console.log(params.role)
+    try {
+      const data = await AccountService.obtenirCompteParRole(params.role);
+      res.json({ message: 'GET request successful', data });
+    } catch (error) {
+      console.error('Erreur dans obtenirCompteParRole:', error);
+      res.status(500).json({ message: 'Erreur du serveur interne!' });
+    }
+  }
+
   async getAccount(req, res) {
     const params = req.params;
     try {
