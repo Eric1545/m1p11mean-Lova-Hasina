@@ -19,7 +19,7 @@ const RendezVousSchema = new mongoose.Schema({
     },
     date_heure: {
         type:Date,
-        default:null
+        default:mongoose.now
     },
     completion: {
         type:Boolean,

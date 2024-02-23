@@ -1,6 +1,8 @@
 const AccountModel = require("../models/AccountModel");
 const RendezVousModel = require("../models/RendezVousModel");
 const ServiceModel = require("../models/ServiceModel");
+const { envoyerEmail } = require("../utils/mailer");
+const { createNotification } = require("./NotificationService");
 
 async function getRendezVous(pageNumber, pageSize, id) {
     try {
@@ -31,9 +33,35 @@ function createRendezVous(postData) {
     rendezVousModel.save();
     return 'Données postées traitées avec succès';
 }
+async function rappelleRendezVous(){
+    console.log('rappel')
+    const date = new Date();
+    const deuxJoursPlusTard = new Date(date.getTime() + (3 * 24 * 60 * 60 * 1000));
+    const rendezVous = await RendezVousModel.find({
+        date_heure:{
+            $gte:date,
+            $lte: deuxJoursPlusTard, 
+        },
+        completion: false
+    }).populate({ path: 'client_id', model: AccountModel })
+    console.log(rendezVous.length)
+    for (const rendezVousItem of rendezVous) {
+        const date_insertion = new Date(rendezVousItem.date_heure);
+        createNotification({
+            nom: `Rappel de rendez-vous pour le ${date_insertion.toLocaleDateString('fr-FR')} à ${date_insertion.toLocaleTimeString()}`,
+            utilisateur: rendezVousItem.client_id,
+            type: "rappel",
+            id: rendezVousItem._id,
+        });
 
+        envoyerEmail(rendezVousItem.client_id.email, "Rappel de rendez-vous", `Vous avez un rendez-vous pour le ${date_insertion.toLocaleDateString('fr-FR')} à ${date_insertion.toLocaleTimeString()} !`);
+    }
+    
+    return rendezVous;
+}
 module.exports = {
     getRendezVous,
     count,
-    createRendezVous
+    createRendezVous,
+    rappelleRendezVous
 };
