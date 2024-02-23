@@ -5,9 +5,9 @@ const ServiceSchema = new mongoose.Schema({
   prix: { type: Number, required: true },
   duree: { type: Number, required: true },
   commission: { type: Number, required: true },
-  image: { type: String, required: true },
+  image: { type: String },
 });
 
 const ServiceModel = mongoose.model('services', ServiceSchema);
 
-module.exports = ServiceModel;
+module.exports = {ServiceModel, ServiceSchema};

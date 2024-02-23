@@ -17,6 +17,8 @@ import {ServicesModule} from "./pages/services/services.module";
 import {DataTablesModule} from "angular-datatables"
 import { ClientModule } from './pages/clients/client.module';
 import {EmployeModule} from "./pages/employe/employe.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {OffreSpecialeModule} from "./pages/offre-speciale/offre-speciale.module";
 
 @NgModule({
   declarations: [
@@ -28,18 +30,22 @@ import {EmployeModule} from "./pages/employe/employe.module";
     NavbarComponent,
     SidebarComponent,
   ],
-  imports: [
-    BrowserModule,
-    UtilisateurModule,
-    IdentificationUtilisateurModule,
-    ClientModule,
-    MatPaginatorModule,
-    NgOptimizedImage,
-    ServicesModule,
-    DataTablesModule,
-    EmployeModule,
-    AppRoutingModule,//ito atao farany foana
-  ],
+    imports: [
+        BrowserModule,
+        UtilisateurModule,
+        IdentificationUtilisateurModule,
+        ClientModule,
+        OffreSpecialeModule,
+        MatPaginatorModule,
+        NgOptimizedImage,
+        ServicesModule,
+        DataTablesModule,
+        EmployeModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+//ito atao farany foana
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
