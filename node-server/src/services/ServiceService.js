@@ -1,4 +1,5 @@
-const ServiceModel = require("../models/ServiceModel");
+const {ServiceModel} = require("../models/ServiceModel");
+
 
 async function getService() {
     try {
