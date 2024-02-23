@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/client/historique'])
         this.authService.storeToken(res.data.token)
         this.authService.storeId(res.data.id)
+        this.authService.storeRole(res.data.role)
       } else {
         this.messageErreur = "Vérifier votre user ou votre mot de passe"
       }

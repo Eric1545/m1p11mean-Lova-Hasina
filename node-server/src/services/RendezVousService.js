@@ -1,6 +1,6 @@
 const AccountModel = require("../models/AccountModel");
 const RendezVousModel = require("../models/RendezVousModel");
-const ServiceModel = require("../models/ServiceModel");
+const { ServiceModel } = require("../models/ServiceModel");
 const { envoyerEmail } = require("../utils/mailer");
 const { createNotification } = require("./NotificationService");
 

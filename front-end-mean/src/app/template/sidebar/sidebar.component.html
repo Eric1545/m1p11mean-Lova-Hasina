@@ -19,104 +19,32 @@
         <a href="#" class="d-block">Alexander Pierce</a>
       </div>
     </div>
-
-    <!-- SidebarSearch Form -->
-    <!--<div class="form-inline">
-      <div class="input-group" data-widget="sidebar-search">
-        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-sidebar">
-            <i class="fas fa-search fa-fw"></i>
-          </button>
-        </div>
-      </div>
-    </div>-->
-
-    <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-
-        <li class="nav-header">EXAMPLES</li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>
-              Services
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/service/liste" class="nav-link" routerLinkActive="active">
-                <i class="fas fa-list-ul nav-icon"></i>
-                <p>Liste</p>
-              </a>
-            </li>
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/service/ajouter" class="nav-link" routerLinkActive="active">
-                <i class="fas fa-plus nav-icon"></i>
-                <p>Ajouter</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
-            <p>
-              Employes
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/employe/liste" class="nav-link" routerLinkActive="active">
-                <i class="fas fa-list-ul nav-icon"></i>
-                <p>Liste</p>
-              </a>
-            </li>
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/employe/ajouter" class="nav-link" routerLinkActive="active">
-                <i class="fas fa-plus nav-icon"></i>
-                <p>Ajouter</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
-            <p>
-              Offre speciale
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/offre-speciale/liste" class="nav-link" routerLinkActive="active">
-                <i class="fas fa-list-ul nav-icon"></i>
-                <p>Liste</p>
-              </a>
-            </li>
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a routerLink="/offre-speciale/ajouter" class="nav-link" routerLinkActive="active">
-                <i class="fas fa-plus nav-icon"></i>
-                <p>Ajouter</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
+        <ng-container *ngFor="let item of sideBar">
+          <li class="nav-item">
+            <a href="{{item.path}}" class="nav-link">
+              <i class="{{ item.icon }}"></i>
+              <p>
+                {{ item.name }}
+                <i class="fas fa-angle-left right" *ngIf="item.enfant"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" *ngIf="item.enfant">
+              <ng-container *ngFor="let child of item.enfant">
+                <li class="nav-item">
+                  <a [routerLink]="child.path" class="nav-link" routerLinkActive="active">
+                    <i class="{{ child.icon }}"></i>
+                    <p>{{ child.name }}</p>
+                  </a>
+                </li>
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
       </ul>
     </nav>
+    
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->

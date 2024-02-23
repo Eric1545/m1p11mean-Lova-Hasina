@@ -15,11 +15,18 @@ export class AuthService {
   storeId(id:string) {
     this.cookieService.set("id",id);
   }
+  
+  storeRole(role:string) {
+    this.cookieService.set("role",role);
+  }
   getToken() {
     return this.cookieService.get('authToken');
   }
   getId(){
     return this.cookieService.get('id');
+  }
+  getRole(){
+    return this.cookieService.get('role');
   }
   clearToken() {
     this.cookieService.delete('authToken');

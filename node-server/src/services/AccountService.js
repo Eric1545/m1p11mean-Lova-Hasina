@@ -1,6 +1,6 @@
 const AccountModel = require("../models/AccountModel");
 const RoleModel = require('../models/RoleModel');
-const ServiceModel = require("../models/ServiceModel");
+const { ServiceModel } = require("../models/ServiceModel");
 const { envoyerEmail, envoyerForgotPassword } = require("../utils/mailer");
 const mongoose = require('mongoose');
 
@@ -161,7 +161,7 @@ async function removeServiceFavoris(idUtilisateur, idFavoris){
 }
 async function login(username, password){
   try{
-    const utilisateur = await AccountModel.find({username,password})
+    const utilisateur = await AccountModel.find({username,password}).populate({path: 'role', model: RoleModel })
     return utilisateur
   } catch (error) {
     console.error(error)

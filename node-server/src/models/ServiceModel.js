@@ -10,4 +10,4 @@ const ServiceSchema = new mongoose.Schema({
 
 const ServiceModel = mongoose.model('services', ServiceSchema);
 
-module.exports = {ServiceModel, ServiceSchema};
+module.exports = {ServiceModel};
