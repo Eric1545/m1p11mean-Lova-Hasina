@@ -4,6 +4,9 @@ import { AjouterOffreSpecialeComponent } from './ajouter-offre-speciale/ajouter-
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {TemplateComponent} from "../../template/template.component";
+import { ListeOffreSpecialeComponent } from './liste-offre-speciale/liste-offre-speciale.component';
+import {DataTablesModule} from "angular-datatables";
+import { ModifierOffreSpecialeComponent } from './modifier-offre-speciale/modifier-offre-speciale.component';
 
 
 const routes: Routes = [
@@ -14,6 +17,14 @@ const routes: Routes = [
       {
         path: 'ajouter',
         component: AjouterOffreSpecialeComponent
+      },
+      {
+        path: 'liste',
+        component: ListeOffreSpecialeComponent
+      },
+      {
+        path: 'modifier/:id',
+        component: ModifierOffreSpecialeComponent
       }
     ]
   },
@@ -21,13 +32,16 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AjouterOffreSpecialeComponent
+    AjouterOffreSpecialeComponent,
+    ListeOffreSpecialeComponent,
+    ModifierOffreSpecialeComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ]
 })
 export class OffreSpecialeModule { }

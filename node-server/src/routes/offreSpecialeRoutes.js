@@ -6,5 +6,9 @@ const OffreSpecialeController = require('../controllers/OffreSpecialeController'
 const router = express.Router();
 
 router.post('/', OffreSpecialeController.ajouterOffreSpeciale);
+router.get('/', OffreSpecialeController.obtenirOffreSpeciale);
+router.get('/:id', OffreSpecialeController.obtenirOffreSpecialeParId);
+router.put('/:id', OffreSpecialeController.modifierOffreSpeciale);
+router.delete('/:id', OffreSpecialeController.supprimerOffreSpeciale);
 
 module.exports = router;

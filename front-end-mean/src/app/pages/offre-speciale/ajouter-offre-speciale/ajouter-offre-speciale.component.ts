@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OffreSpecialeService} from "../../../services/offre-speciale.service";
 import {ServiceService} from "../../../services/service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-ajouter-offre-speciale',
@@ -15,7 +16,7 @@ export class AjouterOffreSpecialeComponent implements OnInit{
   servicesChoisi: any[] = [];
   reductionChoisi: any[] = [];
 
-  constructor(private offreSpecialeService: OffreSpecialeService, private fb: FormBuilder) {}
+  constructor(private router:Router, private offreSpecialeService: OffreSpecialeService, private fb: FormBuilder) {}
 
   async ngOnInit() {
     this.offreSpecialeForm = this.fb.group({
@@ -41,11 +42,11 @@ export class AjouterOffreSpecialeComponent implements OnInit{
         "liste_reduction": this.reductionChoisi
       };
       await this.offreSpecialeService.ajouterOffreSpeciale(data);
+      await this.router.navigate(['/offre-speciale/liste']);
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'offre speciale :', error);
     }
   }
-
 
   addService() {
     const selectedService = this.offreSpecialeForm.get('service')?.value;
