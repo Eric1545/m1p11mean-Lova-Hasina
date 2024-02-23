@@ -17,4 +17,37 @@ export class OffreSpecialeService {
     }
   }
 
+  async obtenirOffreSpeciales() {
+    try {
+      return await axios.get(this.apiUrl);
+    } catch (erreur) {
+      throw erreur;
+    }
+  }
+
+  async obtenirOffreSpecialeParId(id: any) {
+    try {
+      return await axios.get(`${this.apiUrl}/${id}`);
+    } catch (erreur) {
+      throw erreur;
+    }
+  }
+
+  async supprimerOffreSpeciale(id: any): Promise<any> {
+    try {
+      const response = await axios.delete(`${this.apiUrl}/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async mettreAJourOffreSpeciale(offreSpecialeModifie: any): Promise<any> {
+    try {
+      const response = await axios.put(`${this.apiUrl}/${offreSpecialeModifie._id}`, offreSpecialeModifie);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

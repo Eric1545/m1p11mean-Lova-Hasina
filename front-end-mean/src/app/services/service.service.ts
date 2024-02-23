@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
+import {Validators} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ServiceService {
       throw error;
     }
   }
+
 
   async obtenirServices(): Promise<any[]>  {
     try {
