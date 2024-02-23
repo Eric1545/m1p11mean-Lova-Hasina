@@ -20,7 +20,7 @@ import {Router} from "@angular/router";
 
   async ajouterService(): Promise<void> {
     try {
-      const nouveauService = await this.serviceService.ajouterService(this.nouveauService);
+      await this.serviceService.ajouterService(this.nouveauService);
       await this.router.navigate(['/service/liste']);
     } catch (error) {
       console.error('Erreur lors de l\'ajout du service :', error);
