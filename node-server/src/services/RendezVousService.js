@@ -33,6 +33,18 @@ function createRendezVous(postData) {
     rendezVousModel.save();
     return 'Données postées traitées avec succès';
 }
+async function findRendezVousById(id) {
+    try {
+        const rendezVous = await RendezVousModel.findById(id)
+        .populate({ path: 'client_id', model: AccountModel })
+        .populate({ path: 'employe_id', model: AccountModel })
+        .populate({ path: 'service_id', model: ServiceModel })
+        return rendezVous;
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
 async function rappelleRendezVous(){
     console.log('rappel')
     const date = new Date();
@@ -63,5 +75,6 @@ module.exports = {
     getRendezVous,
     count,
     createRendezVous,
-    rappelleRendezVous
+    rappelleRendezVous,
+    findRendezVousById
 };

@@ -19,6 +19,7 @@ export class EmployeFavorisComponent implements OnInit {
   url ="http://localhost:3000"
   constructor(private accountService:AccountService,private auth: AuthService){}
   ngOnInit(): void {
+    this.auth.redirectIfNotConnect()
     this.getData(this.pageNumber, this.pageSize)
   }
   getData(pageNumber: number, pageSize: number){

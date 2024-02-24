@@ -9,23 +9,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ListeProduitFavorisComponent implements OnInit {
 
-  listeProduitFavoris:any[]= []
-  loading:boolean = false
-  
-  url ="http://localhost:3000"
-  constructor(private account:AccountService,private auth: AuthService){}
+  listeProduitFavoris: any[] = []
+  loading: boolean = false
+
+  url = "http://localhost:3000"
+  constructor(private account: AccountService, private auth: AuthService) { }
   ngOnInit(): void {
-      this.getData()
+    this.auth.redirectIfNotConnect()
+    this.getData()
   }
-  getData(){
+  getData() {
     this.loading = true
-    this.account.getUserById(this.auth.getId()).then((response:any)=>{
+    this.account.getUserById(this.auth.getId()).then((response: any) => {
       console.log(response.data.data.service_favorite)
-      this.listeProduitFavoris=response.data.data.service_favorite
+      this.listeProduitFavoris = response.data.data.service_favorite
       this.loading = false
     })
   }
-  eleverFavoris(idService:string){
+  eleverFavoris(idService: string) {
     this.loading = true
     this.account.enleverServiceFavoris(idService).then(() => {
       this.loading = false

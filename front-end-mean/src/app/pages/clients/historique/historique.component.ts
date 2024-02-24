@@ -18,11 +18,8 @@ export class HistoriqueComponent implements OnInit {
   loading: boolean = false;
 
   ngOnInit(): void {
-    if(!this.authService.getToken()){
-      this.router.navigate(['/login'])
-    } else{
+    this.authService.redirectIfNotConnect()
       this.loadRendezVous(this.pageNumber, this.pageSize);
-    }
   }
   loadRendezVous(pageNumber: number, pageSize: number): void {
     this.loading = true

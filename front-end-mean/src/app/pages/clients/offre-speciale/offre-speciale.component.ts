@@ -30,7 +30,6 @@ export class OffreSpecialeComponent {
       console.log(response.data)
       this.listeOffreSpeciale = response.data.data;
       this.totalItems = response.data.nombrePage;
-      // this.totalItems = 2;
       this.loading = false
     });
   }

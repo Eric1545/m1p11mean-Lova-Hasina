@@ -1,4 +1,4 @@
-const { getRendezVous,createRendezVous, count } = require("../services/RendezVousService");
+const { getRendezVous,createRendezVous, count, findRendezVousById } = require("../services/RendezVousService");
 
 class RendezVousController {
   async getRendezVous(req, res) {
@@ -22,6 +22,18 @@ class RendezVousController {
       console.error('Error in getService:', error);
       res.status(500).json({ message: 'Internal Server Error' });
     }
+  }
+  async findRendezVousById(req,res){
+    const params = req.params;
+    try{
+        const rendezVous = await findRendezVousById(params.id);
+        // console.log(rendezVous)
+        res.json({ message: 'GET request successful', rendezVous });
+    } catch(error){
+      console.error('Error in getService:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  
   }
 }
 

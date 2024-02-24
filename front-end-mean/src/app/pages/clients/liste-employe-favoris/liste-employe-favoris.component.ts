@@ -14,7 +14,8 @@ export class ListeEmployeFavorisComponent {
   url ="http://localhost:3000"
   constructor(private account:AccountService,private auth: AuthService){}
   ngOnInit(): void {
-      this.getData()
+    this.auth.redirectIfNotConnect()
+    this.getData()
   }
   getData(){
     this.loading = true

@@ -9,5 +9,7 @@ export class RendezVousService {
   getRendezVous(id: string,pageNumber: number,pageSize:number){
     return axios.get(`${this.url}/api/rendezVous/getRendezVous/${id}/${pageNumber}/${pageSize}`)
   }
-
+  getRendezVousById(id: string){
+    return axios.get(`${this.url}/api/rendezVous/${id}`)
+  }
 }

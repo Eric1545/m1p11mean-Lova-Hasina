@@ -15,6 +15,7 @@ export class AjouterProduitFavorisComponent implements OnInit {
   url ="http://localhost:3000"
   constructor(private service:ServiceService,private account:AccountService,private auth: AuthService) {}
   ngOnInit(): void {
+    this.auth.redirectIfNotConnect()
     this.getService()
   } 
   getService(){

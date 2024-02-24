@@ -1,1 +1,62 @@
-<p>detail-notification works!</p>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+
+            <h1 *ngIf="type === 'offre'">Detail Offre Speciale</h1>
+            <h1 *ngIf="type === 'rappel'">Detail Rappel Rendez-vous</h1>
+            <div class="card" *ngIf="type === 'offre'">
+                <div class="card-header">
+                    <h3 class="card-title">{{detailNotification.nom}}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p><strong>Date debut et Heure:</strong>{{detailNotification.date_debut | date:'dd MMMM yyyy
+                                ':'':'fr'}}</p>
+                            <p><strong>Date fin et Heure:</strong>{{detailNotification.date_fin | date:'dd MMMM yyyy
+                                ':'':'fr'}}</p>
+                            <ng-container *ngFor="let service of detailNotification.liste_service">
+                                <p><strong>Service:</strong> {{service.nom}}</p>
+                                <p><strong>Prix:</strong> {{service.prix}}</p>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" *ngIf="type === 'rappel'">
+                <div class="card-header">
+                    <h3 class="card-title">Rendez-vous</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p><strong>Date et Heure:</strong>{{detailNotification?.date_heure | date:'dd MMMM yyyy
+                                \'à\'
+                                HH:mm':'':'fr'}}</p>
+                            <p><strong>Employé:</strong> {{detailNotification?.employe_id.nom + "
+                                "+detailNotification?.employe_id.prenom}}</p>
+                            <p><strong>Service:</strong> {{detailNotification?.service_id.nom}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

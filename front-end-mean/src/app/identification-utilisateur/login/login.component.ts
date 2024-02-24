@@ -21,7 +21,13 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
     if(this.authService.getToken()){
-      this.router.navigate(['/client/historique'])
+      if(this.authService.getRole() == "client"){
+        this.router.navigate(['/client/historique'])
+      } else if(this.authService.getRole() == "manager"){
+        this.router.navigate(['/employe/liste'])
+      } else if(this.authService.getRole() == "employe"){
+        this.router.navigate(['/employe/liste'])
+      }
     }
   }
   onSubmit(): void{
@@ -29,10 +35,16 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.form.email,this.form.password).then((res:any)=>{
       console.log(res.data)
       if(res.data.login){
-        this.router.navigate(['/client/historique'])
         this.authService.storeToken(res.data.token)
         this.authService.storeId(res.data.id)
         this.authService.storeRole(res.data.role)
+        if(res.data.role == "client"){
+          this.router.navigate(['/client/historique'])
+        } else if(res.data.role == "manager"){
+          this.router.navigate(['/employe/liste'])
+        } else if(res.data.role == "employe"){
+          this.router.navigate(['/employe/liste'])
+        }
       } else {
         this.messageErreur = "Vérifier votre user ou votre mot de passe"
       }
