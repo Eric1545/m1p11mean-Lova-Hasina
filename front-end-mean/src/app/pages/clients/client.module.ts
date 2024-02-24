@@ -13,6 +13,7 @@ import { ListeProduitFavorisComponent } from './liste-produit-favoris/liste-prod
 import { ListeEmployeFavorisComponent } from './liste-employe-favoris/liste-employe-favoris.component';
 import { NotificationComponent } from './notification/notification.component';
 import { DetailNotificationComponent } from './detail-notification/detail-notification.component';
+import { OffreSpecialeComponent } from './offre-speciale/offre-speciale.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
         component: AjouterProduitFavorisComponent
       },
       {
+        path: 'ajouterEmployerFavoris',
+        component: EmployeFavorisComponent
+      },
+      {
         path: 'listeServiceFavoris',
         component: ListeProduitFavorisComponent
       },
@@ -42,6 +47,10 @@ const routes: Routes = [
       {
         path: 'notification',
         component: NotificationComponent
+      },
+      {
+        path: 'offreSpeciale',
+        component: OffreSpecialeComponent
       },
       {
         path: 'detailNotification/:type/:id',
@@ -62,7 +71,8 @@ registerLocaleData(localeFr);
     ListeProduitFavorisComponent,
     ListeEmployeFavorisComponent,
     NotificationComponent,
-    DetailNotificationComponent
+    DetailNotificationComponent,
+    OffreSpecialeComponent
   ],
   imports: [
     CommonModule,

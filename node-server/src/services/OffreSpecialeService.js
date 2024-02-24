@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const OffreSpecialeModel = require("../models/OffreSpeciale");
-const {ServiceModel} = require("../models/ServiceModel");
+const { ServiceModel } = require("../models/ServiceModel");
 
 
 
@@ -106,10 +106,39 @@ async function obtenirOffreSpecialeParId(idOffreSpeciale) {
     }
 }
 
+async function getAllOffreSpeciale(pageNumber, pageSize) {
+    try {
+        const currentDate = new Date();
+        const skip = (pageNumber - 1) * pageSize;
+        const offreSpeciales = await OffreSpecialeModel.find({
+            date_fin: { $gte: currentDate }
+        })
+            .populate('liste_service')
+            .skip(skip)
+            .limit(pageSize);
+        return offreSpeciales;
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
+async function countAllOffreSpecialte() {
+    try {
+        const currentDate = new Date();
+        const count = await OffreSpecialeModel.countDocuments({
+            date_fin: { $gte: currentDate }});
+        return count;
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
 module.exports = {
     ajouterOffreSpeciale,
     obtenirOffreSpeciale,
     obtenirOffreSpecialeParId,
     modifierOffreSpeciale,
-    supprimerOffreSpeciale
+    supprimerOffreSpeciale,
+    getAllOffreSpeciale,
+    countAllOffreSpecialte
 };

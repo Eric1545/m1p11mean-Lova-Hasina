@@ -58,7 +58,9 @@ class AccountController {
     const params = req.params;
     try {
       const data = await AccountService.getAccount(params.pageNumber,params.pageSize);
-      res.json({ message: 'GET request successful', data });
+      const nombreCompte = await AccountService.count()
+      const nombrePage = Math.ceil(nombreCompte/params.pageSize)
+      res.json({ message: 'GET request successful', data, nombrePage});
     } catch (error) {
       console.error('Error in getAccount:', error);
       res.status(500).json({ message: 'Internal Server Error' });

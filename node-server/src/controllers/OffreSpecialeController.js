@@ -1,5 +1,5 @@
-const { Request, Response } = require('express');
 const OffreSpecialeService = require('../services/OffreSpecialeService');
+const { createNotificationOffreSpeciale } = require('../services/NotificationService');
 
 class OffreSpecialeController {
 
@@ -32,6 +32,9 @@ class OffreSpecialeController {
         try {
             const nouveauOS = req.body;
             const resultat = await OffreSpecialeService.ajouterOffreSpeciale(nouveauOS);
+            await createNotificationOffreSpeciale(resultat);
+            const io = req.app.get('socketio');
+            io.emit('notification', { message: 'Ceci est un test de socket.io depuis une route.',handle:"zao ihany" });
             res.status(201).json({ message: 'Offre spéciale ajoutée avec succès', resultat });
         } catch (error) {
             console.error('Erreur lors de l\'ajout de l\'offre spéciale :', error);
@@ -42,7 +45,7 @@ class OffreSpecialeController {
     async obtenirOffreSpeciale(req, res) {
         try {
             const data = await OffreSpecialeService.obtenirOffreSpeciale();
-            console.log("data : ", data)
+            // console.log("data : ", data)
             res.json({ message: 'Offre speciale obtenue avec succes', data });
         } catch (error) {
             console.error('Error in getExample:', error);
@@ -55,6 +58,18 @@ class OffreSpecialeController {
         try {
             const data = await OffreSpecialeService.obtenirOffreSpecialeParId(id);
             res.json({ message: 'GET request successful', data });
+        } catch (erreur) {
+            console.error('Erreur lors de la suppression du service :', erreur);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+    async getAllOffreSpeciale(req, res) {
+        const params = req.params;
+        try {
+            const data = await OffreSpecialeService.getAllOffreSpeciale(params.pageNumber,params.pageSize);
+            const nombreOffreSpeciale = await OffreSpecialeService.countAllOffreSpecialte()
+            const nombrePage = Math.ceil(nombreOffreSpeciale/params.pageSize)
+            res.json({ message: 'GET request successful', data, nombrePage });
         } catch (erreur) {
             console.error('Erreur lors de la suppression du service :', erreur);
             res.status(500).json({ message: 'Internal Server Error' });

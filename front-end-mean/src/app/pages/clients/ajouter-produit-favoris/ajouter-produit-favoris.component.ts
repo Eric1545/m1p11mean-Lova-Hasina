@@ -9,19 +9,32 @@ import { ServiceService } from 'src/app/services/service.service';
   styleUrls: ['./ajouter-produit-favoris.component.css']
 })
 export class AjouterProduitFavorisComponent implements OnInit {
-  listeHistoriqueRendezVous:any[]= []
+  listeService:any[]= []
+  listeProduitFavoris:any[]= []
   loading:boolean = false
+  url ="http://localhost:3000"
   constructor(private service:ServiceService,private account:AccountService,private auth: AuthService) {}
   ngOnInit(): void {
     this.getService()
   } 
   getService(){
+    this.loading = true
     this.service.obtenirServices().then((response:any)=>{
-      this.listeHistoriqueRendezVous = response
+      this.listeService = response
+      this.loading = false
     })
+    this.account.getUserById(this.auth.getId()).then((response:any)=>{
+      // console.log(response.data.data.service_favorite)
+      this.listeProduitFavoris=response.data.data.service_favorite
+    })
+  }
+  isServiceFavorite(idService:string){
+    console.log(this.listeProduitFavoris.find((service:any) => service._id === idService))
+    return this.listeProduitFavoris.find((service:any) => service._id === idService)
   }
   ajouterFavoris(idFavoris:string){
     this.account.ajouterServiceFavoris(this.auth.getId(),idFavoris).then((response: any)=>{
+      this.getService()
     })
   }
 }

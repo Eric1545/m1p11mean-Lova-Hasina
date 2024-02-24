@@ -63,6 +63,17 @@ async function getAccount(pageNumber, pageSize) {
   }
 }
 
+async function count(){
+  try {
+      const role = await RoleModel.findOne({ role: 'employe' });
+      const count = await AccountModel.countDocuments({role: role._id});
+      return count;
+  } catch (error) {
+      console.error('Error fetching data from database:', error);
+      throw error;
+  }
+}
+
 async function obtenirCompteParRole(roleAChercher) {
   try {
     console.log(roleAChercher)
@@ -212,4 +223,5 @@ module.exports = {
   addServiceFavoris,
   removeServiceFavoris,
   getUserById,
+  count,
 };

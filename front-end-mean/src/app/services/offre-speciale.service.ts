@@ -50,4 +50,7 @@ export class OffreSpecialeService {
       throw error;
     }
   }
+  async getAlloffreSpeciale(pageNumber:number,pageSize:number){
+    return await axios.get(`${this.apiUrl}/getAllOffreService/${pageNumber}/${pageSize}`)
+  }
 }

@@ -10,7 +10,7 @@ export class SidebarComponent implements OnInit {
   constructor(private auth:AuthService){}
   sideBar: any[] = []
   ngOnInit(): void {
-    if(this.auth.getRole() === "admin"){
+    if(this.auth.getRole() === "manager"){
       this.sideBar=[
         {
           name: "Services",
@@ -73,6 +73,11 @@ export class SidebarComponent implements OnInit {
           path: "/client/historique",
         },
         {
+          name: "Offre speciale",
+          icon: "nav-icon fas fa-cogs",
+          path: "/client/offreSpeciale",
+        },
+        {
           name: "Employes favoris",
           icon: "nav-icon fas fa-cogs",
           path: "#",
@@ -85,7 +90,7 @@ export class SidebarComponent implements OnInit {
             {
               name:"Ajouter",
               icon: "fas fa-plus nav-icon",
-              path: "/service/ajouter"
+              path: "/client/ajouterEmployerFavoris"
             },
           ]
         },
