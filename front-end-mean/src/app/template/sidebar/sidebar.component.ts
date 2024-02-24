@@ -80,7 +80,7 @@ export class SidebarComponent implements OnInit {
             {
               name:"Liste",
               icon: "fas fa-list-ul nav-icon",
-              path: "/service/liste"
+              path: "/client/listeEmployeFavoris"
             },
             {
               name:"Ajouter",
