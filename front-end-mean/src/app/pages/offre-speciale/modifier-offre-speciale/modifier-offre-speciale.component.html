@@ -1,0 +1,107 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1 class="m-0">Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard v1</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Ajouter une offre speciale</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+
+          <form [formGroup]="offreSpecialeForm" (ngSubmit)="modifierOffreSpeciale()">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="nom">Nom</label>
+                  <input type="text" class="form-control"  id="nom" formControlName="nom">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control"  id="description" formControlName="description">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="dateDebut">Date de début</label>
+                  <input type="date" class="form-control" id="dateDebut" formControlName="dateDebut">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="dateFin">Date de fin</label>
+                  <input type="date" class="form-control" id="dateFin" formControlName="dateFin">
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="service">Service</label>
+                  <select id="service"  class="form-control" formControlName="service">
+                    <option [ngValue]="null" disabled selected>Choisir un service</option>
+                    <option *ngFor="let service of services" [ngValue]="service">
+                      {{ service.nom }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="reduction">Réduction</label>
+                  <input type="number"  class="form-control" id="reduction" formControlName="reduction">
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <button class="btn btn-success w-45" type="button" (click)="addService()">Ajouter un service</button>
+              </div>
+            </div>
+            <div *ngFor="let service of servicesChoisi; let i = index" class="col-sm-12">
+              <div class="row mb-1">
+                <div class="col-sm-6">
+                  <label>{{ service.nom }}</label>
+                </div>
+                <div class="col-sm-3">
+                  <label>{{ reductionChoisi[i] }}</label>
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-danger w-50" type="button" (click)="removeService(i)">Supprimer</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <button class="btn btn-primary w-15" type="submit">Enregistrer</button>
+            </div>
+
+          </form>
+        </div>
+        <!-- /.card-body -->
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Main content -->

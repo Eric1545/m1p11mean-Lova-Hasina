@@ -28,6 +28,7 @@ export class ModifierServicesComponent implements OnInit{
   async obtenirServiceParId() {
     try {
       const result = await this.serviceService.obtenirServiceParId(this.id);
+      console.log(result)
       this.serviceModifie = result.data;
     } catch (error) {
       console.error('Erreur lors de la récupération des services :', error);

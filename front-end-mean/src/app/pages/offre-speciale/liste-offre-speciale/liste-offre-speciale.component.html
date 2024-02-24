@@ -22,32 +22,37 @@
       <div class="card">
 
         <div class="card-header d-flex justify-content-between">
-          <h3 class="card-title">Liste des services</h3>
+          <h3 class="card-title">Liste des offres speciale</h3>
           <a class="btn btn-success ml-auto" routerLink="../ajouter">Ajouter [+]</a>
         </div>
 
         <!-- /.card-header -->
         <div class="card-body">
-          <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="listeServiceTable" class="table table-bordered table-striped">
+          <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="listeOffreSpecialeTable" class="table table-bordered table-striped">
             <thead>
             <tr>
               <th>Nom</th>
-              <th>Prix</th>
-              <th>Durée</th>
-              <th>Commission</th>
+              <th>Description</th>
+              <th>Date de debut</th>
+              <th>Date de fin</th>
               <th>Offre</th>
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of services">
+            <tr *ngFor="let item of offreSpeciales">
               <td>{{item.nom}}</td>
-              <td>{{item.prix}}</td>
-              <td>{{item.duree}}</td>
-              <td>{{item.commission}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.date_debut}}</td>
+              <td>{{item.date_fin}}</td>
+              <td>
+                <ng-container *ngFor="let service of item.liste_service; let i = index">
+                  <p>{{service.nom}} : {{item.liste_reduction}} %</p>
+                </ng-container>
+              </td>
               <td style="width: 18%">
                 <button (click)="redirectModification(item._id)" class="btn btn-warning ml-auto">Modifier</button> |
-                <button (click)="supprimerService(item._id)" class="btn btn-danger ml-auto">Supprimer</button>
+                <button (click)="supprimerOffreSpeciale(item._id)" class="btn btn-danger ml-auto">Supprimer</button>
               </td>
             </tr>
             </tbody>

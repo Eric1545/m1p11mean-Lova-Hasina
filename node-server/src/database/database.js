@@ -9,6 +9,7 @@ const connectDB = async () => {
     //online
     // await mongoose.connect(`mongodb+srv://${config.user}:${config.password}@cluster1.xys21au.mongodb.net/${config.database}`);
     await insertDefaultRole()
+    console.log('base : ', config.database);
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
