@@ -213,7 +213,7 @@ async function getRendezVous(pageNumber, pageSize, id) {
         const rendezVous = await RendezVousModel.find({client_id:id})
             .populate({ path: 'client_id', model: AccountModel })
             .populate({ path: 'employe_id', model: AccountModel })
-            .populate({ path: 'service_id', model: ServiceModel })
+            .populate({ path: 'services', model: ServiceModel })
             .skip(skip)
             .limit(pageSize);
         return rendezVous;
@@ -286,7 +286,7 @@ module.exports = {
     count,
     createRendezVous,
     rappelleRendezVous,
-    findRendezVousById
+    findRendezVousById,
     rappelleRendezVous,
     obtenirDureeTotalRDV,
     obtenirRdvAvant,

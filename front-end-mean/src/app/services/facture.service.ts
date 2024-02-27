@@ -11,4 +11,7 @@ export class FactureService {
   getFactureClient(pageNumber: number,pageSize:number){
     return axios.get(`${this.url}/api/facture/getFactureClient/${this.auth.getId()}/${pageNumber}/${pageSize}`)
   }
+  payerFacture(id: string){
+    return axios.patch(`${this.url}/api/facture/payerFacture/${id}`)
+  }
 }

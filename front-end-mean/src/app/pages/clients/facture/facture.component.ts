@@ -33,4 +33,11 @@ export class FactureComponent implements OnInit{
     this.pageNumber = page;
     this.loadRendezVous(this.pageNumber, this.pageSize); 
   }
+  payer(id: string){
+    console.log(id)
+    this.factureService.payerFacture(id).then((response) => {
+      console.log(response.data)
+      this.loadRendezVous(this.pageNumber, this.pageSize);
+    });
+  }
 }

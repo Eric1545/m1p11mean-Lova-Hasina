@@ -1,4 +1,4 @@
-const { createFacture, getFactureClient, countFactureClient } = require("../services/FactureService");
+const { createFacture, getFactureClient, countFactureClient, payerFacture } = require("../services/FactureService");
 
 class FactureController {
     createFacture(req, res) {
@@ -22,6 +22,16 @@ class FactureController {
             res.json({ message: 'GET request successful', data, nombrePage });
         } catch (error) {
             console.error('Error in getService:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+    async payerFacture(req, res) {
+        const { idFacture } = req.params;
+        try {
+            const data = await payerFacture(idFacture);
+            res.json({ message: 'Facture payée avec succès', data });
+        } catch (error) {
+            console.error('Erreur dans payerFacture:', error);
             res.status(500).json({ message: 'Internal Server Error' });
         }
     }

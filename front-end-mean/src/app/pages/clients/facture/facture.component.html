@@ -35,6 +35,9 @@
                                     <ng-container *ngFor="let service of value.liste_service">
                                         <p><strong>Service:</strong> {{service.nom}}</p>
                                     </ng-container>
+                                    <ng-container *ngIf="!value.completion">
+                                        <button class="btn btn-primary" (click)="payer(value._id)">Payer</button>
+                                    </ng-container>
                                 </div>
                             </div>
                         </div>
