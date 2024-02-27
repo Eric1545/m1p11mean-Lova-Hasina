@@ -5,12 +5,36 @@ const { envoyerEmail, envoyerForgotPassword } = require("../utils/mailer");
 const mongoose = require('mongoose');
 
 
+function estDansSonHoraireDeTravail(employe, dateHeureRdv, dureeRdv) {
+  console.log("1111111")
+  const HMDebutRdv = dateHeureRdv.getHours() * 60 + dateHeureRdv.getMinutes();
+  console.log("2222222")
+  const HMFinRdv = HMDebutRdv + dureeRdv;
+  const horaireDebut =  new Date(employe.heure_debut);
+  const horaireFin =  new Date(employe.heure_fin);
+  console.log("333333")
+  console.log("employe", employe)
+  console.log("dateHeureRdv", dateHeureRdv)
+  console.log("dateHeureRdv.getHours()", dateHeureRdv.getUTCHours())
+  console.log("horaireDebut", horaireDebut)
+  console.log("horaireDebut.getHours()", horaireDebut.getUTCHours())
+  console.log("horaireFin.getHours()", horaireFin.getUTCHours())
+  console.log("333333", employe)
+  const HMDebutHoraire = horaireDebut.getUTCHours() * 60 + horaireDebut.getUTCMinutes();
+  console.log("44444")
+  const HMFinHoraire = horaireFin.getUTCHours() * 60 + horaireFin.getUTCMinutes();
+  console.log("555555")
+  console.log("555555")
+  return (HMDebutHoraire <= HMDebutRdv) && (HMFinHoraire >= HMFinRdv);
+}
+
+
 async function obtenirCompteParId(idCompte) {
   try {
     const compteObjectId = new mongoose.Types.ObjectId(idCompte);
-    const a = await AccountModel.findById(compteObjectId);
-    console.log(a)
-    return a;
+    const employe = await AccountModel.findById(compteObjectId);
+    console.log("employe service", employe);
+    return employe;  // Retourne directement l'objet employe
   } catch (error) {
     console.error('Error fetching data from database:', error);
     throw error;
@@ -93,6 +117,10 @@ async function getUserById(id) {
       .populate({ path: 'role', model: RoleModel })
       .populate({ path: 'service_favorite',model:ServiceModel})
       .populate({ path : 'employe_fav', model:AccountModel})
+
+    console.log("employe : ", accounts);
+    console.log("heure_debut : ", accounts.heure_debut.getHours());
+    console.log("heure_fin : ", accounts.heure_fin.getMinutes());
     return accounts;
   } catch (error) {
     console.error('Error fetching data from database:', error);
@@ -224,4 +252,5 @@ module.exports = {
   removeServiceFavoris,
   getUserById,
   count,
+  estDansSonHoraireDeTravail
 };
