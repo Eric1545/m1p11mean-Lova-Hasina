@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
       this.nombreNotification = response.data.result
     })
   }
-  deconnexion(){
-    this.auth.deconnexion()
+  async deconnexion(){
+    await this.auth.deconnexion()
   }
 }

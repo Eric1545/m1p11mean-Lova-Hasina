@@ -20,15 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private authService:AuthService){
   }
   ngOnInit(): void {
-    if(this.authService.getToken()){
-      if(this.authService.getRole() == "client"){
-        this.router.navigate(['/client/historique'])
-      } else if(this.authService.getRole() == "manager"){
-        this.router.navigate(['/employe/liste'])
-      } else if(this.authService.getRole() == "employe"){
-        this.router.navigate(['/employe/liste'])
-      }
-    }
+    this.authService.deconnexion()
   }
   onSubmit(): void{
     this.loading = true

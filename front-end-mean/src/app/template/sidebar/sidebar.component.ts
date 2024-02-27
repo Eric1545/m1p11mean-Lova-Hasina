@@ -73,6 +73,11 @@ export class SidebarComponent implements OnInit {
           path: "/client/historique",
         },
         {
+          name: "Factures",
+          icon: "nav-icon fas fa-cogs",
+          path: "/client/facture",
+        },
+        {
           name: "Offre speciale",
           icon: "nav-icon fas fa-cogs",
           path: "/client/offreSpeciale",

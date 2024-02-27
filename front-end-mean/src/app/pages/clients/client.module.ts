@@ -14,6 +14,7 @@ import { ListeEmployeFavorisComponent } from './liste-employe-favoris/liste-empl
 import { NotificationComponent } from './notification/notification.component';
 import { DetailNotificationComponent } from './detail-notification/detail-notification.component';
 import { OffreSpecialeComponent } from './offre-speciale/offre-speciale.component';
+import { FactureComponent } from './facture/facture.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
         path: 'detailNotification/:type/:id',
         component: DetailNotificationComponent
       },
+      {
+        path: 'facture',
+        component: FactureComponent
+      },
     ]
   }, 
 ];
@@ -72,7 +77,8 @@ registerLocaleData(localeFr);
     ListeEmployeFavorisComponent,
     NotificationComponent,
     DetailNotificationComponent,
-    OffreSpecialeComponent
+    OffreSpecialeComponent,
+    FactureComponent
   ],
   imports: [
     CommonModule,

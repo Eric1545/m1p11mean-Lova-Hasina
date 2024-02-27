@@ -32,8 +32,11 @@ export class AuthService {
   isConnect(){
     return this.getId() !== "" && this.getToken() !== ""
   }
-  deconnexion(){
-    this.clearToken()
+  async deconnexion(){
+    console.log('ato')
+    await this.cookieService.delete('authToken');
+    await this.cookieService.delete('id');
+    await this.cookieService.delete('role');
     this.router.navigate(['/login'])
   }
   redirectIfNotConnect(){
@@ -42,6 +45,7 @@ export class AuthService {
     }
   }
   clearToken() {
+    console.log('clear')
     this.cookieService.delete('authToken');
     this.cookieService.delete('id');
     this.cookieService.delete('role');

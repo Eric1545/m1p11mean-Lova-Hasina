@@ -7,6 +7,7 @@ const roleRoutes = require('./roleRoutes');
 const { handleFileUpload } = require('../controllers/FileController');
 const rendezVousRoutes = require('./rendezVousRoutes');
 const notificationRoutes = require('./notificationRoutes');
+const factureRoutes = require('./factureRoutes');
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.use('/account', accountRoutes);
 router.use('/service', serviceRoutes);
 router.use('/offre_speciale', offreSpecialeRoutes);
 router.use('/role', roleRoutes);
+router.use('/facture', factureRoutes);
 router.use('/rendezVous', rendezVousRoutes);
 router.use('/notification',notificationRoutes)
 router.post('/upload', handleFileUpload);
