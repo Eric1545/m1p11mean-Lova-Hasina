@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
         },
         {
           name: "Offre speciale",
-          icon: "nav-icon fas fa-user",
+          icon: "nav-icon fas fa-gift",
           path:"#",
           enfant:[
             {
@@ -69,7 +69,7 @@ export class SidebarComponent implements OnInit {
       this.sideBar=[
         {
           name: "Historique",
-          icon: "nav-icon fas fa-cogs",
+          icon: "nav-icon fas fa-history",
           path: "/client/historique",
         },
         {
@@ -79,7 +79,7 @@ export class SidebarComponent implements OnInit {
         },
         {
           name: "Employes favoris",
-          icon: "nav-icon fas fa-cogs",
+          icon: "nav-icon fas fa-star",
           path: "#",
           enfant:[
             {
@@ -96,7 +96,7 @@ export class SidebarComponent implements OnInit {
         },
         {
           name: "Service Favoris",
-          icon: "nav-icon fas fa-cogs",
+          icon: "nav-icon fas fa-heart",
           path: "#",
           enfant:[
             {
@@ -111,7 +111,19 @@ export class SidebarComponent implements OnInit {
             },
           ]
         },
-        
+        {
+        name: "Rendez vous",
+        icon: "nav-icon far fa-calendar-alt",
+        path:"#",
+        enfant:[
+          {
+            name:"Ajouter-au-panier",
+            icon: "fas fa-plus nav-icon",
+            path: "/rendez-vous/ajouter-au-panier"
+          },
+        ]
+      },
+
       ]
     }
   }

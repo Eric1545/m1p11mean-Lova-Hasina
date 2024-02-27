@@ -19,6 +19,7 @@ import { ClientModule } from './pages/clients/client.module';
 import {EmployeModule} from "./pages/employe/employe.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OffreSpecialeModule} from "./pages/offre-speciale/offre-speciale.module";
+import {RendezVousModule} from "./pages/rendez-vous/rendez-vous.module";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {OffreSpecialeModule} from "./pages/offre-speciale/offre-speciale.module"
     SidebarComponent,
   ],
     imports: [
+        RendezVousModule,
         BrowserModule,
         UtilisateurModule,
         IdentificationUtilisateurModule,
