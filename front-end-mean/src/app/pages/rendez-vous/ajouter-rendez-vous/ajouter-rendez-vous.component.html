@@ -20,15 +20,43 @@
     <div class="container-fluid">
 
       <div class="card">
-
-        <div class="card-header d-flex justify-content-between">
-          <h3 class="card-title">Liste des services</h3>
-          <a class="btn btn-success ml-auto" routerLink="../ajouter">Ajouter [+]</a>
+        <div class="card-header">
+          <h3 class="card-title">Prendre un rendez-vous</h3>
         </div>
-
         <!-- /.card-header -->
         <div class="card-body">
-          <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="listeServiceTable" class="table table-bordered table-striped">
+
+          <form [formGroup]="nouveauRdvForm" (ngSubmit)="ajouterRdv()">
+
+            <div class="row justify-content-center">
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label for="employe">Employe</label>
+                  <select id="employe"  class="form-control" formControlName="employe">
+                    <option [ngValue]="null" disabled selected>Choisir un employe</option>
+                    <option *ngFor="let employe of employes" [ngValue]="employe._id">
+                      {{ employe.nom }} {{ employe.prenom }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label for="date_heure">Date</label>
+                  <input type="datetime-local" class="form-control" id="date_heure" formControlName="date_heure">
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <button class="btn btn-primary w-15" style="margin-top: 32px" type="submit">Ajouter</button>
+              </div>
+            </div>
+          </form>
+
+
+
+
+          <label>Liste de service</label>
+          <table id="listeServiceTable" class="table table-bordered table-striped">
             <thead>
             <tr>
               <th>Nom</th>
@@ -44,8 +72,7 @@
               <td>{{item.prix}}</td>
               <td>{{item.duree}}</td>
               <td>{{item.commission}}</td>
-              <td style="width: 10%">
-                <button (click)="redirectModification(item._id)" class="btn ml-auto"><i class="fas fa-edit"></i></button> |
+              <td style="width: 2%">
                 <button (click)="supprimerService(item._id)" class="btn ml-auto"><i class="fas fa-trash-alt" style="color: red"></i></button>
               </td>
             </tr>

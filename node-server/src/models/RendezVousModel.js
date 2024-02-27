@@ -12,11 +12,11 @@ const RendezVousSchema = new mongoose.Schema({
         ref:'accounts',
         default:null
     },
-    service_id: {
+    services: [{
         type:Schema.Types.ObjectId,
         ref:'services',
-        default:null
-    },
+        required:true
+    }],
     date_heure: {
         type:Date,
         default:mongoose.now
