@@ -17,21 +17,19 @@ class ServiceController {
     try {
       const { idClient } = req.params;
       const data = await getService();
-      console.log("data = ", data);
-      const panier = await obtenirDernierPanierParIdClient(idClient);
-      console.log("panier = ", panier);
 
-      // Créer un tableau simplifié avec les propriétés nécessaires
+      const panier = await obtenirDernierPanierParIdClient(idClient);
+
       const dataAvecEstAuPanier = data.map(service => ({
-        _id: service._doc._id,
-        nom: service._doc.nom,
-        prix: service._doc.prix,
-        duree: service._doc.duree,
-        commission: service._doc.commission,
-        estAuPanier: panier.services.includes(service._doc._id)
+        _id: service._id,
+        nom: service.nom,
+        prix: service.prix,
+        duree: service.duree,
+        commission: service.commission,
+        estAuPanier: panier ? (panier.services.includes(service._id) || false) : false
       }));
 
-      res.json({ message: 'GET request successful', data: dataAvecEstAuPanier });
+      return res.json({ message: 'GET request successful', data: dataAvecEstAuPanier });
     } catch (error) {
       console.error('Error in obtenirServicePanier:', error);
       res.status(500).json({ message: 'Internal Server Error' });
