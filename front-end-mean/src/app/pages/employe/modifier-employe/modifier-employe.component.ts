@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeService} from "../../../services/employe.service";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-modifier-employe',
@@ -21,7 +22,7 @@ export class ModifierEmployeComponent implements OnInit {
   loading: boolean = false;
   id: any;
 
-  constructor(private router:Router, private employeService : EmployeService, private route: ActivatedRoute){
+  constructor(private router:Router, private employeService : EmployeService, private route: ActivatedRoute, private authService: AuthService){
   }
 
   ngOnInit() {
@@ -70,7 +71,13 @@ export class ModifierEmployeComponent implements OnInit {
 
       const employeModifie = await this.employeService.mettreAJourEmploye(this.employeModifie);
       const messageSucces = employeModifie.message;
-      await this.router.navigate(['/employe/liste'], { queryParams: { messageSucces } });
+      const role = this.authService.getRole();
+      if (role === "employe") {
+        await this.router.navigate(['/employe/profil'], { queryParams: { messageSucces } });
+      }
+      else if (role === "manager") {
+        await this.router.navigate(['/employe/liste'], { queryParams: { messageSucces } });
+      }
     } catch (error) {
       console.error('Erreur lors de la modification de l\'employe :', error);
     }

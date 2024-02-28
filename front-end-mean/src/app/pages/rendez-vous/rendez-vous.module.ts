@@ -11,6 +11,7 @@ import { AjouterRendezVousComponent } from './ajouter-rendez-vous/ajouter-rendez
 import {IdentificationUtilisateurModule} from "../../identification-utilisateur/identification-utilisateur.module";
 import {DataTablesModule} from "angular-datatables";
 import { ListeRendezVousComponent } from './liste-rendez-vous/liste-rendez-vous.component';
+import { RendezVousTerminerComponent } from './rendez-vous-terminer/rendez-vous-terminer.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
         path: 'liste',
         component: ListeRendezVousComponent
       },
+      {
+        path: 'terminer',
+        component: RendezVousTerminerComponent
+      },
     ]
   },
 ];
@@ -38,7 +43,8 @@ const routes: Routes = [
   declarations: [
     AjouterAuPanierComponent,
     AjouterRendezVousComponent,
-    ListeRendezVousComponent
+    ListeRendezVousComponent,
+    RendezVousTerminerComponent
   ],
   imports: [
     CommonModule,

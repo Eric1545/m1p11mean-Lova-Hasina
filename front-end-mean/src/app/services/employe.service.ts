@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import axios from "axios";
+import {AuthService} from "./auth.service";
 
 
 @Injectable({
@@ -8,6 +9,8 @@ import axios from "axios";
 })
 export class EmployeService {
   private apiUrl = environment.host + '/account';
+
+  constructor(private auth:AuthService) { }
 
   async obtenirEmployes(){
     return axios.get(`${this.apiUrl}/obtenirCompteParRole/employe`)
@@ -30,6 +33,15 @@ export class EmployeService {
     try {
       const response = await axios.get(`${this.apiUrl}/${id}`);
       return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+  async obtenirEmployeParId(): Promise<any> {
+    try {
+      return await this.obtenirCompteParId(this.auth.getId());
     } catch (error) {
       throw error;
     }

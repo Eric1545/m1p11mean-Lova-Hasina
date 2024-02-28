@@ -8,6 +8,7 @@ rendezVousRoutes.get('/getRendezVous/:id/:pageNumber/:pageSize', RendezVousContr
 rendezVousRoutes.get('/:id', RendezVousController.findRendezVousById);
 rendezVousRoutes.get('/terminerRdv/:idRdv', RendezVousController.terminerRdv);
 rendezVousRoutes.post('/rdvParEmploye', RendezVousController.obtenirRdvParEmploye);
+rendezVousRoutes.post('/rdvTerminerParEmploye', RendezVousController.obtenirRdvTerminerParEmploye);
 rendezVousRoutes.post('/', RendezVousController.createRendezVous);
 rendezVousRoutes.post('/ajouterPanier', RendezVousController.ajouterAuPanier);
 rendezVousRoutes.post('/supprimerServiceAuPanier', RendezVousController.supprimerServiceAuPanier);

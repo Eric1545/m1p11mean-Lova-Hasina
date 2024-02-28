@@ -144,7 +144,17 @@ export class SidebarComponent implements OnInit {
               path: "/rendez-vous/liste"
             },
           ]
-        }
+        },
+        {
+          name: "Profil",
+          icon: "nav-icon fas fa-user",
+          path:"/employe/profil"
+        },
+        {
+          name: "Suivi de tâche",
+          icon: "nav-icon fas fa-check",
+          path:"/rendez-vous/terminer"
+        },
       ]
     }
   }

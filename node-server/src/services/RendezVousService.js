@@ -74,6 +74,58 @@ async function obtenirRdvParEmploye(idEmploye, date) {
     }
 }
 
+async function obtenirRdvTerminerParEmploye(idEmploye, date) {
+    try {
+        const debutJournee = new Date(date);
+        debutJournee.setHours(0, 0, 0, 0);
+        const finJournee = new Date(date);
+        finJournee.setHours(23, 59, 59, 999);
+
+        const rendezVous = await RendezVousModel.find({
+            employe_id: idEmploye,
+            completion: true,
+            date_heure: {
+                $gte: debutJournee,
+                $lte: finJournee
+            }
+        })
+            .sort({ date_heure: 1 })
+            .populate({ path: 'client_id', model: AccountModel })
+            .populate({ path: 'employe_id', model: AccountModel })
+            .populate({ path: 'services', model: ServiceModel })
+            .lean()
+            .exec();
+
+
+        const listeTransformee = rendezVous.map((rdv) => {
+            // Ajouter prixCommision dans la liste de service
+            rdv.services = rdv.services.map((service) => ({
+                ...service,
+                prixCommission: (service.prix * service.commission) / 100,
+            }));
+
+            // Ajouter commissionRdv : somme de prixCommision des services
+            rdv.commissionRdv = rdv.services.reduce(
+                (total, service) => total + service.prixCommission,
+                0
+            );
+
+            return rdv;
+        });
+
+        // Ajouter commissionTotal : somme de commissionRdv dans la liste
+        const commissionTotal = listeTransformee.reduce(
+            (total, rdv) => total + rdv.commissionRdv,
+            0
+        );
+
+        return { rdv: listeTransformee, commissionTotal };
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
+
 
 async function compteNbServiceAuPanier(idClient) {
     try {
@@ -361,5 +413,6 @@ module.exports = {
     ajouterAuPanier,
     compteNbServiceAuPanier,
     obtenirRdvParEmploye,
-    terminerRdv
+    terminerRdv,
+    obtenirRdvTerminerParEmploye
 };

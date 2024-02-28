@@ -1,7 +1,8 @@
 const { getRendezVous,createRendezVous, count, obtenirDureeTotalRDV, obtenirRdvAvant, obtenirRdvApres, obtenirDureeTotalPanier, ajouterAuPanier,
   obtenirDureeTotalDernierPanier,
   compteNbServiceAuPanier, obtenirRdvParEmploye,
-  terminerRdv
+  terminerRdv,
+  obtenirRdvTerminerParEmploye
 } = require("../services/RendezVousService");
 const {estDansSonHoraireDeTravail, obtenirCompteParId} = require("../services/AccountService");
 const {obtenirPanierParId, obtenirDernierPanierParIdClient, obtenirDernierPanierObjetParIdClient,
@@ -11,13 +12,24 @@ const { findRendezVousById } = require("../services/RendezVousService");
 
 class RendezVousController {
 
+  async obtenirRdvTerminerParEmploye(req, res) {
+    const { date, idEmploye } = req.body;
+    try {
+      const data = await obtenirRdvTerminerParEmploye(idEmploye, date);
+      res.json({ message: 'Rendez vous terminé obtenu avec succes', data});
+    } catch (error) {
+      console.error('Erreur dans obtenirDernierPanierParIdClient:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
   async obtenirRdvParEmploye(req, res) {
     const { date, idEmploye } = req.body;
     console.log("date = ", date)
     console.log("idEmploye = ", idEmploye)
     try {
       const data = await obtenirRdvParEmploye(idEmploye, date);
-      res.json({ message: 'Dernier panier obtenu avec succes', data});
+      res.json({ message: 'Rendez vous obtenu avec succes', data});
     } catch (error) {
       console.error('Erreur dans obtenirDernierPanierParIdClient:', error);
       res.status(500).json({ message: 'Internal Server Error' });

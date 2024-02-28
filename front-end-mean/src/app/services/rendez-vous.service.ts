@@ -12,6 +12,19 @@ export class RendezVousService {
 
   constructor(private auth: AuthService) { }
 
+  async obtenirRdvTerminerParEmploye(date: any) {
+    try {
+      const donnee = {
+        idEmploye: this.auth.getId(),
+        date: date
+      }
+      const reponse = await axios.post(`${this.apiUrl}/rdvTerminerParEmploye`, donnee);
+      return reponse.data;
+    } catch (erreur) {
+      throw erreur;
+    }
+  }
+
   async terminerRdv(idRdv: any) {
     try {
       const reponse = await axios.get(`${this.apiUrl}/terminerRdv/${idRdv}`);

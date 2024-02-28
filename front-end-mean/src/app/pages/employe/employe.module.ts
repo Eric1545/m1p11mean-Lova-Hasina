@@ -8,6 +8,7 @@ import {DataTablesModule} from "angular-datatables";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {IdentificationUtilisateurModule} from "../../identification-utilisateur/identification-utilisateur.module";
 import { ModifierEmployeComponent } from './modifier-employe/modifier-employe.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'modifier/:id',
         component: ModifierEmployeComponent
+      },
+      {
+        path: 'profil',
+        component: ProfilComponent
       }
     ]
   },
@@ -35,7 +40,8 @@ const routes: Routes = [
   declarations: [
     ListeEmployeComponent,
     AjouterEmployeComponent,
-    ModifierEmployeComponent
+    ModifierEmployeComponent,
+    ProfilComponent
   ],
   imports: [
     CommonModule,
