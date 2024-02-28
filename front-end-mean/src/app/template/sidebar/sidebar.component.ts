@@ -75,6 +75,18 @@ export class SidebarComponent implements OnInit {
             },
           ]
         },
+        {
+          name: "Statistiques",
+          icon: "nav-icon fas fa-chart-line",
+          path:"#",
+          enfant:[
+            {
+              name:"reservation",
+              icon: "nav-icon fas fa-chart-bar",
+              path: "/statistiques/reservation"
+            },
+          ]
+        },
       ]
     }
     else if(this.auth.getRole()=== "client"){

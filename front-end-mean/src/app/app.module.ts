@@ -21,6 +21,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OffreSpecialeModule} from "./pages/offre-speciale/offre-speciale.module";
 import {RendezVousModule} from "./pages/rendez-vous/rendez-vous.module";
 import { StatModule } from './pages/stat/stat.module';
+import {StatistiquesModule} from "./pages/statistiques/statistiques.module";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { StatModule } from './pages/stat/stat.module';
         RendezVousModule,
         BrowserModule,
         UtilisateurModule,
+        StatistiquesModule,
         IdentificationUtilisateurModule,
         ClientModule,
         OffreSpecialeModule,

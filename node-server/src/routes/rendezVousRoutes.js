@@ -12,6 +12,9 @@ rendezVousRoutes.post('/rdvTerminerParEmploye', RendezVousController.obtenirRdvT
 rendezVousRoutes.post('/', RendezVousController.createRendezVous);
 rendezVousRoutes.post('/ajouterPanier', RendezVousController.ajouterAuPanier);
 rendezVousRoutes.post('/supprimerServiceAuPanier', RendezVousController.supprimerServiceAuPanier);
+rendezVousRoutes.post('/nbRdvParJours', RendezVousController.nbRdvParJours);
+rendezVousRoutes.post('/nbRdvParMois', RendezVousController.nbRdvParMois);
+rendezVousRoutes.post('/nbRdvParJoursMois', RendezVousController.nbRdvParJoursMois);
 rendezVousRoutes.get('/nbServiceAuPanier/:idClient', RendezVousController.compteNbServiceAuPanier);
 rendezVousRoutes.get('/obtenirDernierPanierParIdClient/:idClient', RendezVousController.obtenirDernierPanierParIdClient);
 

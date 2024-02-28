@@ -2,7 +2,10 @@ const { getRendezVous,createRendezVous, count, obtenirDureeTotalRDV, obtenirRdvA
   obtenirDureeTotalDernierPanier,
   compteNbServiceAuPanier, obtenirRdvParEmploye,
   terminerRdv,
-  obtenirRdvTerminerParEmploye
+  obtenirRdvTerminerParEmploye,
+  nbRdvParJoursMois,
+  nbRdvParJours,
+  nbRdvParMois
 } = require("../services/RendezVousService");
 const {estDansSonHoraireDeTravail, obtenirCompteParId} = require("../services/AccountService");
 const {obtenirPanierParId, obtenirDernierPanierParIdClient, obtenirDernierPanierObjetParIdClient,
@@ -11,6 +14,52 @@ const {obtenirPanierParId, obtenirDernierPanierParIdClient, obtenirDernierPanier
 const { findRendezVousById } = require("../services/RendezVousService");
 
 class RendezVousController {
+
+  async nbRdvParJours(req, res) {
+    const { mois, annee } = req.body;
+    try {
+      const reponse = await nbRdvParJours(mois, annee);
+      console.log("reponse = ", reponse);
+      res.json({ message: 'nbRdvParJoursMois', data: reponse});
+    } catch (error) {
+      console.error('Erreur dans nbRdvParJoursMois:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async nbRdvParMois(req, res) {
+    const { annee } = req.body;
+    try {
+      const reponse = await nbRdvParMois(annee);
+      console.log("reponse = ", reponse);
+      res.json({ message: 'nbRdvParJoursMois', data: reponse});
+    } catch (error) {
+      console.error('Erreur dans nbRdvParJoursMois:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async nbRdvParJoursMois(req, res) {
+    const { mois, annee } = req.body;
+    try {
+      let reponse = null;
+      console.log(mois)
+      console.log(annee)
+      if (mois === 0) {
+        console.log("nbRdvParMois")
+        reponse = await nbRdvParMois(annee);
+      }
+      else {
+        console.log("nbRdvParJours")
+        reponse = await nbRdvParJours(mois, annee);
+      }
+      console.log("reponse = ", reponse);
+      res.json({ message: 'nbRdvParJoursMois', data: reponse});
+    } catch (error) {
+      console.error('Erreur dans nbRdvParJoursMois:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
 
   async obtenirRdvTerminerParEmploye(req, res) {
     const { date, idEmploye } = req.body;
