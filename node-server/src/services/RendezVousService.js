@@ -47,6 +47,99 @@ async function terminerRdv(idRdv) {
     }
 }
 
+async function nbRdvParJours(mois, annee) {
+    try {
+        const dernierJourDuMois = new Date(annee, mois, 1);
+        dernierJourDuMois.setHours(-1);
+
+        let response = Array.from({ length: dernierJourDuMois.getDate() }, (_, index) => ({ _id: index + 1, count: 0 }));
+
+        const result = await RendezVousModel.aggregate([
+            {
+                $match: {
+                    date_heure: {
+                        $gte: new Date(`${annee}-${mois.toString().padStart(2, '0')}-01T00:00:00.000Z`),
+                        $lt: new Date(`${annee}-${(mois + 1).toString().padStart(2, '0')}-01T00:00:00.000Z`)
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: { $dayOfMonth: "$date_heure" },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            }
+        ]);
+
+        console.log('Rendez-vous par jour:', result);
+
+        // Mettre à jour les valeurs de count dans la réponse
+        result.forEach(item => {
+            const index = item._id - 1; // L'index dans le tableau commence à 0
+            if (index >= 0 && index < response.length) {
+                response[index].count = item.count;
+            }
+        });
+
+        console.log('Réponse mise à jour:', response);
+        return response;
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
+
+
+async function nbRdvParMois(annee) {
+    try {
+        const result = await RendezVousModel.aggregate([
+            {
+                $match: {
+                    date_heure: {
+                        $gte: new Date(`${annee}-01-01`),
+                        $lt: new Date(`${annee + 1}-01-01`)
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: { $month: "$date_heure" },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            }
+        ]);
+
+        const response = Array.from({ length: 12 }, (_, index) => ({
+            _id: getNomMois(index + 1),
+            count: 0
+        }));
+
+        result.forEach(item => {
+            const index = item._id - 1;
+            if (index >= 0 && index < response.length) {
+                response[index].count = item.count;
+            }
+        });
+
+        console.log('Rendez-vous par mois:', response);
+        return response;
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
+
+function getNomMois(numeroMois) {
+    const mois = new Date(2000, numeroMois - 1, 1).toLocaleString('fr-FR', { month: 'long' });
+    return mois.charAt(0).toUpperCase() + mois.slice(1); // Mettez la première lettre en majuscule
+}
+
 async function obtenirRdvParEmploye(idEmploye, date) {
     try {
         const debutJournee = new Date(date);
@@ -414,5 +507,7 @@ module.exports = {
     compteNbServiceAuPanier,
     obtenirRdvParEmploye,
     terminerRdv,
-    obtenirRdvTerminerParEmploye
+    obtenirRdvTerminerParEmploye,
+    nbRdvParMois,
+    nbRdvParJours
 };

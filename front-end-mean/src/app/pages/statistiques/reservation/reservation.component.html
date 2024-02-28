@@ -1,0 +1,75 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1 class="m-0">Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard v1</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+
+      <div class="card">
+
+        <div class="card-header d-flex justify-content-between">
+          <h3 class="card-title">Nombre de reservation</h3>
+        </div>
+
+        <!-- /.card-header -->
+        <div class="card-body">
+          <form novalidate #f="ngForm" (ngSubmit)="f.form.valid && changerChart()">
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Mois</label>
+
+                  <select id="mois" name="mois"  class="form-control" ngModel required [(ngModel)]="donnee.mois" #nom="ngModel">
+                    <option value="0" selected>Tous les mois</option>
+                    <option value="1">Janvier</option>
+                    <option value="2">Février</option>
+                    <option value="3">Mars</option>
+                    <option value="4">Avril</option>
+                    <option value="5">Mai</option>
+                    <option value="6">Juin</option>
+                    <option value="7">Juillet</option>
+                    <option value="8">Août</option>
+                    <option value="9">Septembre</option>
+                    <option value="10">Octobre</option>
+                    <option value="11">Novembre</option>
+                    <option value="12">Décembre</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>Annee</label>
+                  <input type="number" name="annee" class="form-control" ngModel required [(ngModel)]="donnee.annee" #nom="ngModel">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary" style="margin-top: 32px"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+          <div>
+            <canvas id="reservationChart"></canvas>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Main content -->
