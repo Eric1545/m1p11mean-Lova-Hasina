@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SocketService } from 'src/app/services/socket.service';
 import {RendezVousService} from "../../services/rendez-vous.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit {
     private notificationService: NotificationService,
     private webSocketService: SocketService,
     private auth: AuthService,
+    private router:Router
   ) {}
   ngOnInit(): void {
     this.getData()
@@ -31,7 +33,9 @@ export class NavbarComponent implements OnInit {
     })
   }
   async deconnexion(){
-    await this.auth.deconnexion()
+    // await this.auth.deconnexion()
+    
+    this.router.navigate(['/login'])
   }
 
   obtenirNbServiceAuPanier(){

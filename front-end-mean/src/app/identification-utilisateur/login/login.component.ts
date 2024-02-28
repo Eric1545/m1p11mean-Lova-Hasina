@@ -20,7 +20,10 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private authService:AuthService){
   }
   ngOnInit(): void {
-    this.authService.deconnexion()
+    if(this.authService.getToken() ){
+      this.authService.clearToken()
+    }
+    this.authService.clearToken()
   }
   onSubmit(): void{
     this.loading = true

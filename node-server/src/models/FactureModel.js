@@ -21,6 +21,7 @@ const factureSchema = new mongoose.Schema({
         type: Number,
         required: true
     }],
+    date_insertion:{type:Date,default:mongoose.now},
     completion: {
         type: Boolean,
         default: null

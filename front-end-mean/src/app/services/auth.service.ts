@@ -34,11 +34,16 @@ export class AuthService {
   }
   async deconnexion(){
     console.log('ato')
-    await this.cookieService.delete('authToken');
-    await this.cookieService.delete('id');
-    await this.cookieService.delete('role');
-    this.router.navigate(['/login'])
-  }
+    try {
+        await this.cookieService.delete('authToken');
+        await this.cookieService.delete('id');
+        await this.cookieService.delete('role');
+        this.router.navigate(['/login']);
+    } catch (error) {
+        console.error('Une erreur est survenue lors de la déconnexion :', error);
+    }
+}
+
   redirectIfNotConnect(){
     if(!this.isConnect()){
       this.router.navigate(['/login'])

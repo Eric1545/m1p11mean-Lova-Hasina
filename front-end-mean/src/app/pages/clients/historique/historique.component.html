@@ -31,7 +31,10 @@
                 <div class="col-6">
                   <p><strong>Date et Heure:</strong>{{value.date_heure | date:'dd MMMM yyyy \'à\' HH:mm':'':'fr'}}</p>
                   <p><strong>Employé:</strong> {{value.employe_id.nom + " "+value.employe_id.prenom}}</p>
-                  <p><strong>Service:</strong> {{value.service_id.nom}}</p>
+                  <ng-container *ngFor="let item of value.services">
+
+                    <p><strong>Service:</strong> {{item.nom}}</p>
+                  </ng-container>
                 </div>
                 <!-- <div class="col-6"> -->
                   <!-- <p><strong>Coiffeur:</strong> ato</p> -->

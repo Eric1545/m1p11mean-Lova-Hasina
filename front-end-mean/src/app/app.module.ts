@@ -20,6 +20,7 @@ import {EmployeModule} from "./pages/employe/employe.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OffreSpecialeModule} from "./pages/offre-speciale/offre-speciale.module";
 import {RendezVousModule} from "./pages/rendez-vous/rendez-vous.module";
+import { StatModule } from './pages/stat/stat.module';
 
 @NgModule({
   declarations: [
@@ -43,9 +44,10 @@ import {RendezVousModule} from "./pages/rendez-vous/rendez-vous.module";
         ServicesModule,
         DataTablesModule,
         EmployeModule,
-        AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        StatModule,
+        AppRoutingModule,
 //ito atao farany foana
     ],
   providers: [

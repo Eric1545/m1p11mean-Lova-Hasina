@@ -8,6 +8,7 @@ const { handleFileUpload } = require('../controllers/FileController');
 const rendezVousRoutes = require('./rendezVousRoutes');
 const notificationRoutes = require('./notificationRoutes');
 const factureRoutes = require('./factureRoutes');
+const statistiqueRoutes = require('./statistiqueRoutes');
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.use('/role', roleRoutes);
 router.use('/facture', factureRoutes);
 router.use('/rendezVous', rendezVousRoutes);
 router.use('/notification',notificationRoutes)
+router.use('/statistique',statistiqueRoutes)
 router.post('/upload', handleFileUpload);
 router.post('/emitEvent', (req, res) => {
     const io = req.app.get('socketio');
