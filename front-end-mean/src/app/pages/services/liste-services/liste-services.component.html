@@ -28,6 +28,7 @@
 
         <!-- /.card-header -->
         <div class="card-body">
+          <p *ngIf="messageSucces != null" style="color: green"> {{messageSucces}} </p>
           <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="listeServiceTable" class="table table-bordered table-striped">
             <thead>
             <tr>

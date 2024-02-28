@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Subject} from "rxjs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {OffreSpecialeService} from "../../../services/offre-speciale.service";
 
 @Component({
@@ -12,13 +12,19 @@ export class ListeOffreSpecialeComponent implements OnInit {
   offreSpeciales: any[] = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+  messageSucces : any = null;
 
-  constructor(private router:Router, private offreSpecialeService: OffreSpecialeService) { }
+  constructor(private router:Router, private offreSpecialeService: OffreSpecialeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.dtOptions = {
       pagingType : "full_numbers",
     }
+    this.route.queryParams.subscribe(params => {
+      if (params && params['messageSucces']) {
+        this.messageSucces = params['messageSucces'];
+      }
+    });
     return this.obtenirOffreSpeciales();
   }
 
@@ -42,7 +48,8 @@ export class ListeOffreSpecialeComponent implements OnInit {
   async supprimerOffreSpeciale(id: any) {
     try {
       if (confirm('Voulez-vous supprimer ce offre speciale :' + id)) {
-        await this.offreSpecialeService.supprimerOffreSpeciale(id);
+        const offreSpeciale = await this.offreSpecialeService.supprimerOffreSpeciale(id);
+        this.messageSucces = offreSpeciale.message;
         await this.obtenirOffreSpeciales();
       }
     } catch (error) {

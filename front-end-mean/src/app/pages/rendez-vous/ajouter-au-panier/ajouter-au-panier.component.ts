@@ -10,11 +10,13 @@ import {RendezVousService} from "../../../services/rendez-vous.service";
 })
 export class AjouterAuPanierComponent implements OnInit{
   services: any[] = [];
+  messageErreur : any = null;
+  messageSucces : any = null;
 
   constructor(private serviceService: ServiceService, private rdvService: RendezVousService, private router: Router) {}
 
   async ngOnInit() {
-    this.services = await this.serviceService.obtenirServices();
+    this.services = await this.serviceService.obtenirServicePanier();
   }
 
   async ajouterAuPanier(idService: any) {

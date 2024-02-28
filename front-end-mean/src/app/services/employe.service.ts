@@ -18,7 +18,8 @@ export class EmployeService {
       const role = await axios.get(`${environment.host}/role`)
       const idRoleClient = role.data.data.filter((value:any)=>value.role === "employe")
       data.role = idRoleClient[0]._id
-      return await axios.post(`${this.apiUrl}`, data).then();
+      const reponse = await axios.post(`${this.apiUrl}`, data);
+      return reponse.data;
     } catch(error){
       throw error;
     }

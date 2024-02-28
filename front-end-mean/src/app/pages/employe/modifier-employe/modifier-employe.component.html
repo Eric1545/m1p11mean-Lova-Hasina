@@ -44,6 +44,24 @@
                   </div>
 
                   <div class="col-12">
+                    <label class="form-label">Heure debut</label>
+                    <div class="input-group has-validation">
+                      <input value="{{employeModifie.heure_debut}}" type="time" name="heure_debut" class="form-control" ngModel required
+                             [(ngModel)]="employeModifie.heure_debut" #heure_debut="ngModel">
+                      <div class="invalid-feedback">Entrer l'heure debut.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label">Heure Fin</label>
+                    <div class="input-group has-validation">
+                      <input value="{{employeModifie.heure_fin}}" type="time" name="heure_fin" class="form-control" ngModel required
+                             [(ngModel)]="employeModifie.heure_fin" #heure_fin="ngModel">
+                      <div class="invalid-feedback">Entrer l'heure fin.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
                     <label class="form-label">Mot de passe</label>
                     <input value="{{employeModifie.password}}" type="password" name="password" class="form-control" ngModel required
                            [(ngModel)]="employeModifie.password" #password="ngModel">

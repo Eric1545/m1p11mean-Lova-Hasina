@@ -10,6 +10,7 @@ import {ModifierEmployeComponent} from "../employe/modifier-employe/modifier-emp
 import { AjouterRendezVousComponent } from './ajouter-rendez-vous/ajouter-rendez-vous.component';
 import {IdentificationUtilisateurModule} from "../../identification-utilisateur/identification-utilisateur.module";
 import {DataTablesModule} from "angular-datatables";
+import { ListeRendezVousComponent } from './liste-rendez-vous/liste-rendez-vous.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
         path: 'ajouter',
         component: AjouterRendezVousComponent
       },
+      {
+        path: 'liste',
+        component: ListeRendezVousComponent
+      },
     ]
   },
 ];
@@ -32,7 +37,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AjouterAuPanierComponent,
-    AjouterRendezVousComponent
+    AjouterRendezVousComponent,
+    ListeRendezVousComponent
   ],
   imports: [
     CommonModule,

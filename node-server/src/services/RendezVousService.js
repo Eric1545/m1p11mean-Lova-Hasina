@@ -7,6 +7,72 @@ const { createNotification } = require("./NotificationService");
 const mongoose = require("mongoose");
 const OffreSpecialeModel = require("../models/OffreSpeciale");
 const {obtenirDernierPanierParIdClient} = require("./PanierService");
+const {createFacture} = require("./FactureService");
+
+
+async function terminerRdv(idRdv) {
+    try {
+        console.log("idRdv = ", idRdv);
+
+        const result = await RendezVousModel.updateOne(
+            { _id: idRdv },
+            { $set: { completion: true } }
+        );
+
+        if (result.nModified === 0) {
+            console.log('Rendez vous non trouvé');
+            throw new Error('Rendez vous non trouvé');
+        }
+
+        const rdv = await  RendezVousModel.find({
+            _id: idRdv
+        });
+        console.log("rdv = ", rdv)
+        console.log("rdv = ", rdv[0].client_id)
+        console.log("rdv = ", rdv[0].employe_id)
+        console.log("rdv = ", rdv[0].services)
+        const donnee = {
+            client_id: rdv[0].client_id,
+            employe_id: rdv[0].employe_id,
+            liste_service: rdv[0].services,
+            liste_reduction: rdv[0].reductions,
+            completion: false
+        }
+        await createFacture(donnee);
+        console.log('Rendez vous terminé avec succès');
+        return 'Rendez vous terminé avec succès';
+    } catch (erreur) {
+        console.error('Erreur lors de la suppression du service dans le panier :', erreur);
+        throw erreur;
+    }
+}
+
+async function obtenirRdvParEmploye(idEmploye, date) {
+    try {
+        const debutJournee = new Date(date);
+        debutJournee.setHours(0, 0, 0, 0);
+        const finJournee = new Date(date);
+        finJournee.setHours(23, 59, 59, 999);
+
+        const rendezVous = await RendezVousModel.find({
+            employe_id: idEmploye,
+            date_heure: {
+                $gte: debutJournee,
+                $lte: finJournee
+            }
+        })
+            .sort({ date_heure: 1 })
+            .populate({ path: 'client_id', model: AccountModel })
+            .populate({ path: 'employe_id', model: AccountModel })
+            .populate({ path: 'services', model: ServiceModel })
+            .exec();
+
+        return rendezVous;
+    } catch (error) {
+        console.error('Error fetching data from database:', error);
+        throw error;
+    }
+}
 
 
 async function compteNbServiceAuPanier(idClient) {
@@ -293,5 +359,7 @@ module.exports = {
     obtenirRdvApres,
     obtenirDureeTotalDernierPanier,
     ajouterAuPanier,
-    compteNbServiceAuPanier
+    compteNbServiceAuPanier,
+    obtenirRdvParEmploye,
+    terminerRdv
 };

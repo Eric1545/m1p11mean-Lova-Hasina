@@ -29,6 +29,12 @@
           <form [formGroup]="nouveauRdvForm" (ngSubmit)="ajouterRdv()">
 
             <div class="row justify-content-center">
+              <p style="color: red" *ngIf="messageErreur !== null">{{messageErreur}}</p>
+              <p style="color: green" *ngIf="messageSucces !== null">{{messageSucces}}</p>
+            </div>
+
+
+            <div class="row justify-content-center">
               <div class="col-sm-5">
                 <div class="form-group">
                   <label for="employe">Employe</label>
@@ -54,8 +60,12 @@
 
 
 
-
-          <label>Liste de service</label>
+          <div class="row">
+            <button class="btn btn-success w-15 justify-content-end" style="margin-top: 32px" routerLink="../ajouter-au-panier">Ajouter un service</button>
+          </div>
+          <div class="row justify-content-center">
+            <h3>Liste de service</h3>
+          </div>
           <table id="listeServiceTable" class="table table-bordered table-striped">
             <thead>
             <tr>

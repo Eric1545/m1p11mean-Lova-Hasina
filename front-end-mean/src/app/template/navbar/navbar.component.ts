@@ -13,7 +13,12 @@ export class NavbarComponent implements OnInit {
   nombreNotification:number = 0
   nbServiceAuPanier:number = 0
 
-  constructor(private rendezVousService: RendezVousService,private notificationService: NotificationService,private webSocketService: SocketService,private auth:AuthService){}
+  constructor(
+    private rendezVousService: RendezVousService,
+    private notificationService: NotificationService,
+    private webSocketService: SocketService,
+    private auth: AuthService,
+  ) {}
   ngOnInit(): void {
     this.getData()
     this.obtenirNbServiceAuPanier()

@@ -22,38 +22,51 @@
       <div class="card">
 
         <div class="card-header d-flex justify-content-between">
-          <h3 class="card-title">Liste des offres speciale</h3>
-          <a class="btn btn-success ml-auto" routerLink="../ajouter">Ajouter [+]</a>
+          <h3 class="card-title">Liste des rendez vous</h3>
         </div>
 
         <!-- /.card-header -->
         <div class="card-body">
+
+          <form novalidate #f="ngForm" (ngSubmit)="f.form.valid && chercherRdv()">
+            <div class="row">
+              <div class="col-sm-2">
+                <!-- text input -->
+                <div class="form-group">
+<!--                  <label>Date</label>-->
+                  <input type="date" name="date" class="form-control" ngModel required [(ngModel)]="date" #nom="ngModel">
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+
           <p *ngIf="messageSucces != null" style="color: green"> {{messageSucces}} </p>
-          <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="listeOffreSpecialeTable" class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped">
             <thead>
             <tr>
-              <th>Nom</th>
-              <th>Description</th>
-              <th>Date de debut</th>
-              <th>Date de fin</th>
-              <th>Offre</th>
+              <th>Client</th>
+              <th>Date</th>
+              <th>Services</th>
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of offreSpeciales">
-              <td>{{item.nom}}</td>
-              <td>{{item.description}}</td>
-              <td>{{item.date_debut}}</td>
-              <td>{{item.date_fin}}</td>
+            <tr *ngFor="let item of rdv">
+              <td>{{item.client_id.nom}}</td>
+              <td>{{item.date_heure}}</td>
               <td>
-                <ng-container *ngFor="let service of item.liste_service; let i = index">
-                  <p>{{service.nom}} : {{item.liste_reduction}} %</p>
+                <ng-container *ngFor="let service of item.services; let i = index">
+                  <p>{{service.nom}}</p>
                 </ng-container>
               </td>
               <td style="width: 18%">
-                <button (click)="redirectModification(item._id)" class="btn ml-auto"><i class="fas fa-edit"></i></button> |
-                <button (click)="supprimerOffreSpeciale(item._id)" class="btn ml-auto"><i class="fas fa-trash-alt" style="color: red"></i></button>
+                <button *ngIf="item.completion === false"  (click)="terminerRdv(item._id)" class="btn btn-success">
+                  Terminer
+                </button>
+                <i *ngIf="item.completion === true" class="fas fa-check-circle"></i>
               </td>
             </tr>
             </tbody>

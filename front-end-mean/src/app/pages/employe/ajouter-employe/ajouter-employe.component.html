@@ -35,12 +35,30 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="yourUsername" class="form-label">Username</label>
+                    <label class="form-label">Username</label>
                     <div class="input-group has-validation">
                       <span class="input-group-text" id="inputGroupPrepend">@</span>
                       <input type="text" name="username" class="form-control" ngModel required
                              [(ngModel)]="nouveauEmploye.username" #username="ngModel">
                       <div class="invalid-feedback">Entrer votre username.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label">Heure debut</label>
+                    <div class="input-group has-validation">
+                      <input type="time" name="heure_debut" class="form-control" ngModel required
+                             [(ngModel)]="nouveauEmploye.heure_debut" #heure_debut="ngModel">
+                      <div class="invalid-feedback">Entrer l'heure debut.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label">Heure Fin</label>
+                    <div class="input-group has-validation">
+                      <input type="time" name="heure_fin" class="form-control" ngModel required
+                             [(ngModel)]="nouveauEmploye.heure_fin" #heure_fin="ngModel">
+                      <div class="invalid-feedback">Entrer l'heure fin.</div>
                     </div>
                   </div>
 

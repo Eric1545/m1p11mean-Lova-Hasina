@@ -17,6 +17,10 @@ const RendezVousSchema = new mongoose.Schema({
         ref:'services',
         required:true
     }],
+    reductions: [{
+        type: Number,
+        required: true
+    }],
     date_heure: {
         type:Date,
         default:mongoose.now

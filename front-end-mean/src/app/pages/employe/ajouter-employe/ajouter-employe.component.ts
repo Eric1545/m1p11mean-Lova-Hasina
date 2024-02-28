@@ -13,6 +13,8 @@ export class AjouterEmployeComponent {
     prenom: null,
     email:null,
     username: null,
+    heure_debut: null,
+    heure_fin: null,
     password:null
   };
   loading: boolean = false;
@@ -23,14 +25,15 @@ export class AjouterEmployeComponent {
   async ajouterEmploye(): Promise<void> {
     try {
       this.loading = true
-      const employeAInserer = {
-        ...this.nouveauEmploye,
-        heure_debut: new Date(),
-        heure_fin: new Date(),
-      }
-      await this.employeService.ajouterEmploye(employeAInserer);
+
+      const dateActuelle: Date = new Date();
+      this.nouveauEmploye.heure_debut = new Date(`${dateActuelle.toISOString().slice(0, 10)}T${this.nouveauEmploye.heure_debut}:00.000Z`);
+      this.nouveauEmploye.heure_fin = new Date(`${dateActuelle.toISOString().slice(0, 10)}T${this.nouveauEmploye.heure_fin}:00.000Z`);
+
+      const employeAjouter = await this.employeService.ajouterEmploye(this.nouveauEmploye);
+      const messageSucces = employeAjouter.message;
       this.loading = false;
-      await this.router.navigate(['/employe/liste']);
+      await this.router.navigate(['/employe/liste'], { queryParams: { messageSucces } });
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'employe :', error);
     }

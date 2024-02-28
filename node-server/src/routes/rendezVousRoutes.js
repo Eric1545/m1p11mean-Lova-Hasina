@@ -6,6 +6,8 @@ const rendezVousRoutes = express.Router();
 
 rendezVousRoutes.get('/getRendezVous/:id/:pageNumber/:pageSize', RendezVousController.getRendezVous);
 rendezVousRoutes.get('/:id', RendezVousController.findRendezVousById);
+rendezVousRoutes.get('/terminerRdv/:idRdv', RendezVousController.terminerRdv);
+rendezVousRoutes.post('/rdvParEmploye', RendezVousController.obtenirRdvParEmploye);
 rendezVousRoutes.post('/', RendezVousController.createRendezVous);
 rendezVousRoutes.post('/ajouterPanier', RendezVousController.ajouterAuPanier);
 rendezVousRoutes.post('/supprimerServiceAuPanier', RendezVousController.supprimerServiceAuPanier);

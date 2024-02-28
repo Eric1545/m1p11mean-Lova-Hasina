@@ -12,13 +12,36 @@ export class RendezVousService {
 
   constructor(private auth: AuthService) { }
 
+  async terminerRdv(idRdv: any) {
+    try {
+      const reponse = await axios.get(`${this.apiUrl}/terminerRdv/${idRdv}`);
+      return reponse.data;
+    } catch (erreur) {
+      throw erreur;
+    }
+  }
+
+  async obtenirRdvParEmploye(date: any) {
+    try {
+      const donnee = {
+        idEmploye: this.auth.getId(),
+        date: date
+      }
+      const reponse = await axios.post(`${this.apiUrl}/rdvParEmploye`, donnee);
+      return reponse.data;
+    } catch (erreur) {
+      throw erreur;
+    }
+  }
+
   async supprimerServiceAuPanier(idService: any) {
     try {
       const panier = {
         clientId: this.auth.getId(),
         serviceId: idService
       }
-      return await axios.post(`${this.apiUrl}/supprimerServiceAuPanier`, panier);
+      const reponse = await axios.post(`${this.apiUrl}/supprimerServiceAuPanier`, panier);
+      return reponse.data;
     } catch (erreur) {
       throw erreur;
     }
@@ -36,7 +59,8 @@ export class RendezVousService {
   async ajouterRdv(nouveauRdv: any) {
     try {
       nouveauRdv.client_id = this.auth.getId();
-      return await axios.post(`${this.apiUrl}`, nouveauRdv);
+      const rdvAjouter = await axios.post(`${this.apiUrl}`, nouveauRdv);
+      return rdvAjouter.data;
     } catch (erreur) {
       throw erreur;
     }

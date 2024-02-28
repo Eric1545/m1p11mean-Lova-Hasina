@@ -5,21 +5,16 @@ const { envoyerEmail, envoyerForgotPassword } = require("../utils/mailer");
 const mongoose = require('mongoose');
 
 
-function estDansSonHoraireDeTravail(employe, dateHeureRdv, dureeRdv) {
+function estDansSonHoraireDeTravail(horaireDebut, horaireFin, dateHeureRdv, dureeRdv) {
   console.log("1111111")
   const HMDebutRdv = dateHeureRdv.getHours() * 60 + dateHeureRdv.getMinutes();
   console.log("2222222")
   const HMFinRdv = HMDebutRdv + dureeRdv;
-  const horaireDebut =  new Date(employe.heure_debut);
-  const horaireFin =  new Date(employe.heure_fin);
-  console.log("333333")
-  console.log("employe", employe)
   console.log("dateHeureRdv", dateHeureRdv)
   console.log("dateHeureRdv.getHours()", dateHeureRdv.getUTCHours())
   console.log("horaireDebut", horaireDebut)
   console.log("horaireDebut.getHours()", horaireDebut.getUTCHours())
   console.log("horaireFin.getHours()", horaireFin.getUTCHours())
-  console.log("333333", employe)
   const HMDebutHoraire = horaireDebut.getUTCHours() * 60 + horaireDebut.getUTCMinutes();
   console.log("44444")
   const HMFinHoraire = horaireFin.getUTCHours() * 60 + horaireFin.getUTCMinutes();

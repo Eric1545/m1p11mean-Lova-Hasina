@@ -19,13 +19,18 @@
   <section class="content">
     <div class="container-fluid">
 
+      <div class="row justify-content-center">
+        <h2>Liste de service</h2>
+      </div>
+
       <div class="services-grid">
         <div class="service-card" *ngFor="let service of services">
           <img class="service-image" src="assets/img/product-1.jpg" alt="Service 1">
           <h3>{{service.nom}}</h3>
           <p>Prix: ${{service.prix}}</p>
           <p>Durée: {{service.duree}} minutes</p>
-          <button class="add-to-cart-btn" (click)="ajouterAuPanier(service._id)" ><i class="fas fa-cart-plus fa-lg mr-2"></i> Ajouter au Panier</button>
+          <button class="add-to-cart-btn" *ngIf="service.estAuPanier === false" (click)="ajouterAuPanier(service._id)" ><i class="fas fa-cart-plus fa-lg mr-2"></i> Ajouter au Panier</button>
+          <button class="add-to-cart-btn-disable" *ngIf="service.estAuPanier === true"><i class="fas fa-shopping-cart fa-lg mr-2"></i> Déjà au Panier</button>
         </div>
 
         <!--<div class="service-card">

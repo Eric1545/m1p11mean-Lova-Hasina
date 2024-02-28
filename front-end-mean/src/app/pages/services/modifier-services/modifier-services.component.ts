@@ -38,7 +38,8 @@ export class ModifierServicesComponent implements OnInit{
   async modifierService(): Promise<void> {
     try {
       const serviceModifie = await this.serviceService.mettreAJourService(this.serviceModifie);
-      await this.router.navigate(['/service/liste']);
+      const data = serviceModifie.message;
+      await this.router.navigate(['/service/liste'], { queryParams: { data } });
     } catch (error) {
       console.error('Erreur lors de la modification du service :', error);
     }

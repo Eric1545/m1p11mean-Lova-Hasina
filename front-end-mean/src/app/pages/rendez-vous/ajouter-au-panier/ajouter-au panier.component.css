@@ -31,3 +31,35 @@
   border: none;
   border-radius: 4px;
 }
+
+/* styles.css ou styles.scss */
+.add-to-cart-btn-disable {
+  background-color: #FF69B4; /* Couleur rose */
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 10px;
+  cursor: not-allowed; /* Curseur non autorisé lorsque le bouton est désactivé */
+  border: none;
+  border-radius: 4px;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #FF69B4; /* Couleur rose au survol (peut être la même que la couleur normale) */
+}
+
+.disabled-icon::before {
+  content: "\1F6AB"; /* Icône de panneau d'interdiction Unicode */
+  margin-right: 5px;
+}
+
+
+/* styles.css ou styles.scss */
+.disabled-btn {
+  background-color: #ccc; /* Couleur de fond gris */
+  color: #666; /* Couleur de texte grise */
+  /* Ajoutez d'autres styles pour personnaliser le bouton désactivé selon vos besoins */
+}

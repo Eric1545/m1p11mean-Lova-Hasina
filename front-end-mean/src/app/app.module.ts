@@ -48,7 +48,8 @@ import {RendezVousModule} from "./pages/rendez-vous/rendez-vous.module";
         ReactiveFormsModule,
 //ito atao farany foana
     ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,8 @@ export class OffreSpecialeService {
 
   async ajouterOffreSpeciale(nouvelleOffreSpeciale: any) {
     try {
-      return await axios.post(this.apiUrl, nouvelleOffreSpeciale);
+      const response = await axios.post(this.apiUrl, nouvelleOffreSpeciale);
+      return response.data;
     } catch (erreur) {
       throw erreur;
     }

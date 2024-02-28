@@ -81,7 +81,7 @@ class AccountController {
     const postData = req.body;
     try {
       const result = await AccountService.createAccount(postData);
-      res.json({ message: 'POST request successful', result });
+      res.json({ message: 'Compte ajouter avec succès', result });
     } catch (error) {
       console.error('Error in postAccount:', error);
       res.status(500).json({ message: 'Internal Server Error' });

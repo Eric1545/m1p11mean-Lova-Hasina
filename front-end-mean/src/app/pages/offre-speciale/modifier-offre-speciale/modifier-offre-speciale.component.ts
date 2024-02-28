@@ -18,7 +18,7 @@ export class ModifierOffreSpecialeComponent implements OnInit{
   offreSpecialeAModifie: any;
   id: any;
 
-  constructor(private router:Router, private offreSpecialeService: OffreSpecialeService, private fb: FormBuilder, private route: ActivatedRoute) {}
+  constructor(private router:Router, private offreSpecialeService: OffreSpecialeService, private fb: FormBuilder, private route: ActivatedRoute, private serviceService: ServiceService) {}
 
   async ngOnInit() {
     this.offreSpecialeForm = this.fb.group({
@@ -30,7 +30,7 @@ export class ModifierOffreSpecialeComponent implements OnInit{
       reduction: ['', Validators.required],
     });
 
-    this.services = await new ServiceService().obtenirServices();
+    this.services = await this.serviceService.obtenirServices();
 
     this.id = this.route.snapshot.params['id'];
     const offreSpeciale = await this.offreSpecialeService.obtenirOffreSpecialeParId(this.id);
@@ -59,8 +59,11 @@ export class ModifierOffreSpecialeComponent implements OnInit{
       this.offreSpecialeAModifie.liste_service = this.servicesChoisi.map(item => item._id);
       this.offreSpecialeAModifie.liste_reduction = this.reductionChoisi;
 
-      await this.offreSpecialeService.mettreAJourOffreSpeciale(this.offreSpecialeAModifie);
-      await this.router.navigate(['/offre-speciale/liste']);
+
+      const offreSpecialeModifie = await this.offreSpecialeService.mettreAJourOffreSpeciale(this.offreSpecialeAModifie);
+
+      const messageSucces = offreSpecialeModifie.message;
+      await this.router.navigate(['/offre-speciale/liste'], { queryParams: { messageSucces } });
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'offre speciale :', error);
     }

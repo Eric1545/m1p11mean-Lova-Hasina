@@ -13,6 +13,8 @@ export class ModifierEmployeComponent implements OnInit {
     prenom: null,
     email:null,
     username: null,
+    heure_debut: null,
+    heure_fin: null,
     password:null,
     image_url:null
   };
@@ -32,8 +34,29 @@ export class ModifierEmployeComponent implements OnInit {
   async obtenirEmployeParId() {
     try {
       const result = await this.employeService.obtenirCompteParId(this.id);
-      console.log(result.data)
       this.employeModifie = result.data;
+      const dateDebut = new Date(this.employeModifie.heure_debut);
+      const dateFin = new Date(this.employeModifie.heure_fin);
+
+      let minuteDebut: string | number = dateDebut.getUTCMinutes();
+      let heureDebut: string | number = dateDebut.getUTCHours();
+      if (minuteDebut < 10) {
+        minuteDebut = '0' + minuteDebut;
+      }
+      if (heureDebut < 10) {
+        heureDebut = '0' + heureDebut;
+      }
+      let minuteFin: string | number = dateFin.getUTCMinutes();
+      let heureFin: string | number = dateFin.getUTCHours();
+      if (minuteFin < 10) {
+        minuteFin = '0' + minuteFin;
+      }
+      if (heureFin < 10) {
+        heureFin = '0' + heureFin;
+      }
+
+      this.employeModifie.heure_debut = heureDebut + ':' + minuteDebut;
+      this.employeModifie.heure_fin = heureFin + ':' + minuteFin;
     } catch (error) {
       console.error('Erreur lors de la récupération des employes :', error);
     }
@@ -41,8 +64,13 @@ export class ModifierEmployeComponent implements OnInit {
 
   async modifierEmploye(): Promise<void> {
     try {
+      const dateActuelle: Date = new Date();
+      this.employeModifie.heure_debut = new Date(`${dateActuelle.toISOString().slice(0, 10)}T${this.employeModifie.heure_debut}:00.000Z`);
+      this.employeModifie.heure_fin = new Date(`${dateActuelle.toISOString().slice(0, 10)}T${this.employeModifie.heure_fin}:00.000Z`);
+
       const employeModifie = await this.employeService.mettreAJourEmploye(this.employeModifie);
-      await this.router.navigate(['/employe/liste']);
+      const messageSucces = employeModifie.message;
+      await this.router.navigate(['/employe/liste'], { queryParams: { messageSucces } });
     } catch (error) {
       console.error('Erreur lors de la modification de l\'employe :', error);
     }

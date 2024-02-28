@@ -74,12 +74,12 @@ export class SidebarComponent implements OnInit {
         },
         {
           name: "Factures",
-          icon: "nav-icon fas fa-cogs",
+          icon: "nav-icon fas fa-file-invoice-dollar",
           path: "/client/facture",
         },
         {
           name: "Offre speciale",
-          icon: "nav-icon fas fa-cogs",
+          icon: "nav-icon fas fa-gift",
           path: "/client/offreSpeciale",
         },
         {
@@ -129,6 +129,22 @@ export class SidebarComponent implements OnInit {
         ]
       },
 
+      ]
+    }
+    else if(this.auth.getRole()=== "employe"){
+      this.sideBar=[
+        {
+          name: "Rendez vous",
+          icon: "nav-icon far fa-calendar-alt",
+          path: "#",
+          enfant: [
+            {
+              name: "Liste",
+              icon: "fas fa-plus nav-icon",
+              path: "/rendez-vous/liste"
+            },
+          ]
+        }
       ]
     }
   }

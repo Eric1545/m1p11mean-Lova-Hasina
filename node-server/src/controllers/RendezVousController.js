@@ -1,6 +1,7 @@
 const { getRendezVous,createRendezVous, count, obtenirDureeTotalRDV, obtenirRdvAvant, obtenirRdvApres, obtenirDureeTotalPanier, ajouterAuPanier,
   obtenirDureeTotalDernierPanier,
-  compteNbServiceAuPanier
+  compteNbServiceAuPanier, obtenirRdvParEmploye,
+  terminerRdv
 } = require("../services/RendezVousService");
 const {estDansSonHoraireDeTravail, obtenirCompteParId} = require("../services/AccountService");
 const {obtenirPanierParId, obtenirDernierPanierParIdClient, obtenirDernierPanierObjetParIdClient,
@@ -9,6 +10,30 @@ const {obtenirPanierParId, obtenirDernierPanierParIdClient, obtenirDernierPanier
 const { findRendezVousById } = require("../services/RendezVousService");
 
 class RendezVousController {
+
+  async obtenirRdvParEmploye(req, res) {
+    const { date, idEmploye } = req.body;
+    console.log("date = ", date)
+    console.log("idEmploye = ", idEmploye)
+    try {
+      const data = await obtenirRdvParEmploye(idEmploye, date);
+      res.json({ message: 'Dernier panier obtenu avec succes', data});
+    } catch (error) {
+      console.error('Erreur dans obtenirDernierPanierParIdClient:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  async terminerRdv(req, res) {
+    const { idRdv } = req.params;
+    try {
+      const data = await terminerRdv(idRdv);
+      res.json({ message: data, data});
+    } catch (error) {
+      console.error('Erreur dans obtenirRdvParEmploye:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
 
   async obtenirDernierPanierParIdClient(req, res) {
     const { idClient } = req.params;
@@ -25,7 +50,8 @@ class RendezVousController {
     const { clientId, serviceId }  = req.body;
     try {
       const data = await supprimerServiceAuPanier(clientId, serviceId);
-      res.json({ message: 'Dernier panier obtenu avec succes', data});
+      console.log(data)
+      res.json({ message: 'Le service a été supprimé avec succès de votre panier.', data});
     } catch (error) {
       console.error('Erreur dans supprimerServiceAuPanier:', error);
       res.status(500).json({ message: 'Internal Server Error' });
@@ -86,7 +112,9 @@ class RendezVousController {
       const dateHeure = new Date(date_heure);
       const dureeRdv = await obtenirDureeTotalDernierPanier(client_id);
 
-      if (await estDansSonHoraireDeTravail(employe, dateHeure, dureeRdv)) {
+      const horaireDebut =  new Date(employe.heure_debut);
+      const horaireFin =  new Date(employe.heure_fin);
+      if (await estDansSonHoraireDeTravail(horaireDebut, horaireFin, dateHeure, dureeRdv)) {
         const tabRdvAvant = await obtenirRdvAvant(employe_id, dateHeure);
         const rdvAvant = (await tabRdvAvant).length > 0 ? tabRdvAvant[0] : null;
         if (rdvAvant !== null) {
@@ -94,7 +122,7 @@ class RendezVousController {
           const HMRdvAvant = rdvAvant.date_heure.getHours() * 60 + rdvAvant.date_heure.getMinutes() + dureeRdvAvant;
           const HMNouveauRdv = dateHeure.getHours() * 60 + dateHeure.getMinutes();
           if (HMRdvAvant >= HMNouveauRdv) {
-            return res.json({message: 'Y a encore un rdv avant', rendezVous: n});
+            return res.json({etat: 0, message: 'Y a encore un rdv avant', rendezVous: n});
           }
         }
         const tabRdvApres = await obtenirRdvApres(employe_id, dateHeure);
@@ -104,7 +132,7 @@ class RendezVousController {
           const HMRdvApres = rdvApres.date_heure.getHours() * 60 + rdvApres.date_heure.getMinutes();
           const HMFinNouveauRdv = dateHeure.getHours() * 60 + dateHeure.getMinutes() + dureeRdvApres;
           if (HMFinNouveauRdv >= HMRdvApres) {
-            return res.json({message: 'Y a encore un rdv apres', rendezVous: n});
+            return res.json({etat: 0, message: 'Y a encore un rdv apres', rendezVous: n});
           }
         }
 
@@ -116,10 +144,11 @@ class RendezVousController {
         console.log("tabPanier[0] = ", tabPanier)
         await modifierPanierParId(tabPanier._id);
         console.log("rendezVous: ", rendezVous)
-        return res.json({message: 'POST request successful', rendezVous: rendezVous});
+        return res.json({etat: 1, message: 'POST request successful', rendezVous: rendezVous});
       }
       console.log('Pas dans son horaire')
-      return res.json({message: 'Pas dans son horaire', rendezVous: n});
+      const heureDeTravail = horaireDebut.getUTCHours() + 'H ' + horaireDebut.getUTCMinutes() + ' à ' + horaireFin.getUTCHours() + 'H ' + horaireFin.getUTCMinutes()
+      return res.json({etat: 0, message: 'l\'horaire de travail de cet employe est de ' + heureDeTravail, rendezVous: n});
 
     } catch (error) {
       console.error('Error in getService:', error);

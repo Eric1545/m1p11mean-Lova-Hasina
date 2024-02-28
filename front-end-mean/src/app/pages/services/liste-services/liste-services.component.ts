@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {filter, Subject} from "rxjs";
 import {ServiceService} from "../../../services/service.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-liste-services',
@@ -12,13 +12,20 @@ export class ListeServicesComponent implements OnInit {
   services: any[] = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+  messageSucces : any = null;
 
-  constructor(private router:Router, private serviceService: ServiceService) { }
+  constructor(private router:Router, private serviceService: ServiceService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.dtOptions = {
       pagingType : "full_numbers",
     }
+    this.route.queryParams.subscribe(params => {
+      if (params && params['data']) {
+        this.messageSucces = params['data'];
+      }
+    });
     return this.obtenirServices();
   }
 
@@ -41,7 +48,8 @@ export class ListeServicesComponent implements OnInit {
   async supprimerService(id: any) {
     try {
       if (confirm('Voulez-vous supprimer ce service :' + id)) {
-        await this.serviceService.supprimerService(id);
+        const service = await this.serviceService.supprimerService(id);
+        this.messageSucces = service.message;
         await this.obtenirServices();
       }
     } catch (error) {

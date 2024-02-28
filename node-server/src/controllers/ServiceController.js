@@ -1,4 +1,5 @@
 const { getService, createService, modifierService, supprimerService, obtenirServiceParId} = require("../services/ServiceService");
+const {obtenirDernierPanierParIdClient} = require("../services/PanierService");
 
 
 class ServiceController {
@@ -12,11 +13,38 @@ class ServiceController {
     }
   }
 
+  async obtenirServicePanier(req, res) {
+    try {
+      const { idClient } = req.params;
+      const data = await getService();
+      console.log("data = ", data);
+      const panier = await obtenirDernierPanierParIdClient(idClient);
+      console.log("panier = ", panier);
+
+      // Créer un tableau simplifié avec les propriétés nécessaires
+      const dataAvecEstAuPanier = data.map(service => ({
+        _id: service._doc._id,
+        nom: service._doc.nom,
+        prix: service._doc.prix,
+        duree: service._doc.duree,
+        commission: service._doc.commission,
+        estAuPanier: panier.services.includes(service._doc._id)
+      }));
+
+      res.json({ message: 'GET request successful', data: dataAvecEstAuPanier });
+    } catch (error) {
+      console.error('Error in obtenirServicePanier:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+
+
   async createService(req, res) {
     const postData = req.body;
     try {
       const result = await createService(postData);
-      res.json({ message: 'POST request successful', result });
+      res.json({ message: 'Service ajouter avec succès', result });
     } catch (error) {
       console.error('Error in postService:', error);
       res.status(500).json({ message: 'Internal Server Error' });

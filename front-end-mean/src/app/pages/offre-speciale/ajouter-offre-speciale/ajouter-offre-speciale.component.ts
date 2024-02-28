@@ -16,7 +16,7 @@ export class AjouterOffreSpecialeComponent implements OnInit{
   servicesChoisi: any[] = [];
   reductionChoisi: any[] = [];
 
-  constructor(private router:Router, private offreSpecialeService: OffreSpecialeService, private fb: FormBuilder) {}
+  constructor(private router:Router, private offreSpecialeService: OffreSpecialeService, private serviceService: ServiceService, private fb: FormBuilder) {}
 
   async ngOnInit() {
     this.offreSpecialeForm = this.fb.group({
@@ -27,7 +27,7 @@ export class AjouterOffreSpecialeComponent implements OnInit{
       service: [null, Validators.required],
       reduction: ['', Validators.required],
     });
-    this.services = await new ServiceService().obtenirServices();
+    this.services = await this.serviceService.obtenirServices();
   }
 
   async ajouterOffreSpeciale() {
@@ -41,8 +41,10 @@ export class AjouterOffreSpecialeComponent implements OnInit{
         "liste_service": this.servicesChoisi.map(item => item._id),
         "liste_reduction": this.reductionChoisi
       };
-      await this.offreSpecialeService.ajouterOffreSpeciale(data);
-      await this.router.navigate(['/offre-speciale/liste']);
+      const offreSpecialeAjouter = await this.offreSpecialeService.ajouterOffreSpeciale(data);
+
+      const messageSucces = offreSpecialeAjouter.message;
+      await this.router.navigate(['/offre-speciale/liste'], { queryParams: { messageSucces } });
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'offre speciale :', error);
     }
