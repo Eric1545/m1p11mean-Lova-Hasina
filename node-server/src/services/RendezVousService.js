@@ -5,15 +5,12 @@ const { ServiceModel } = require("../models/ServiceModel");
 const { envoyerEmail } = require("../utils/mailer");
 const { createNotification } = require("./NotificationService");
 const mongoose = require("mongoose");
-const OffreSpecialeModel = require("../models/OffreSpeciale");
 const {obtenirDernierPanierParIdClient} = require("./PanierService");
 const {createFacture} = require("./FactureService");
 
 
 async function terminerRdv(idRdv) {
     try {
-        console.log("idRdv = ", idRdv);
-
         const result = await RendezVousModel.updateOne(
             { _id: idRdv },
             { $set: { completion: true } }
@@ -27,10 +24,6 @@ async function terminerRdv(idRdv) {
         const rdv = await  RendezVousModel.find({
             _id: idRdv
         });
-        console.log("rdv = ", rdv)
-        console.log("rdv = ", rdv[0].client_id)
-        console.log("rdv = ", rdv[0].employe_id)
-        console.log("rdv = ", rdv[0].services)
         const donnee = {
             client_id: rdv[0].client_id,
             employe_id: rdv[0].employe_id,
@@ -39,7 +32,6 @@ async function terminerRdv(idRdv) {
             completion: false
         }
         await createFacture(donnee);
-        console.log('Rendez vous terminé avec succès');
         return 'Rendez vous terminé avec succès';
     } catch (erreur) {
         console.error('Erreur lors de la suppression du service dans le panier :', erreur);
@@ -84,7 +76,6 @@ async function nbRdvParJours(mois, annee) {
             }
         });
 
-        console.log('Réponse mise à jour:', response);
         return response;
     } catch (error) {
         console.error('Error fetching data from database:', error);
@@ -127,7 +118,6 @@ async function nbRdvParMois(annee) {
             }
         });
 
-        console.log('Rendez-vous par mois:', response);
         return response;
     } catch (error) {
         console.error('Error fetching data from database:', error);

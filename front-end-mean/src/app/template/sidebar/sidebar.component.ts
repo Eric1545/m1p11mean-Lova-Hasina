@@ -30,18 +30,6 @@ export class SidebarComponent implements OnInit {
           ]
         },
         {
-          name: "Statistiques",
-          icon: "nav-icon fas fa-cogs",
-          path:"#",
-          enfant:[
-            {
-              name:"Temps moyen de travail",
-              icon: "fas fa-list-ul nav-icon",
-              path: "/stat/tempsMoyen"
-            },
-          ]
-        },
-        {
           name: "Employes",
           icon: "nav-icon fas fa-user",
           path:"#",
@@ -81,9 +69,19 @@ export class SidebarComponent implements OnInit {
           path:"#",
           enfant:[
             {
+              name:"Temps moyen de travail",
+              icon: "nav-icon fas fa-chart-bar",
+              path: "/stat/tempsMoyen"
+            },
+            {
               name:"reservation",
               icon: "nav-icon fas fa-chart-bar",
               path: "/statistiques/reservation"
+            },
+            {
+              name:"chiffre d'affaire",
+              icon: "nav-icon fas fa-chart-bar",
+              path: "/statistiques/chiffre-affaire"
             },
           ]
         },
