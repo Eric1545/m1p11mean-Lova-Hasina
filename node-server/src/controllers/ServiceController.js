@@ -26,7 +26,8 @@ class ServiceController {
         prix: service.prix,
         duree: service.duree,
         commission: service.commission,
-        estAuPanier: panier ? (panier.services.includes(service._id) || false) : false
+        estAuPanier: panier ? (panier.services.includes(service._id) || false) : false,
+        image: service.image
       }));
 
       return res.json({ message: 'GET request successful', data: dataAvecEstAuPanier });

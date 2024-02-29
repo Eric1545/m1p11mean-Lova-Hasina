@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {TemplateComponent} from "./template/template.component";
 import {ListeUtilisateurComponent} from "./utilisateur/liste-utilisateur/liste-utilisateur.component";
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
       },
     ]
   },
-  {path: '', redirectTo: '/client/historique', pathMatch: 'full'},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 
@@ -23,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

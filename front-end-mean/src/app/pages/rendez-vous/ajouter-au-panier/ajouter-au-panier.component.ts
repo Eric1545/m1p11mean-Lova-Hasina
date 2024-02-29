@@ -13,12 +13,13 @@ export class AjouterAuPanierComponent implements OnInit{
   services: any[] = [];
   messageErreur : any = null;
   messageSucces : any = null;
-  apiUrl = "http://localhost:3000";
+  apiUrl = environment.socket;
 
   constructor(private serviceService: ServiceService, private rdvService: RendezVousService, private router: Router) {}
 
   async ngOnInit() {
     this.services = await this.serviceService.obtenirServicePanier();
+    console.log(this.services)
   }
 
   async ajouterAuPanier(idService: any) {
