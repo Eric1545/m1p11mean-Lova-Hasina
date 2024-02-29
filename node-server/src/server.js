@@ -11,6 +11,7 @@ const cron = require('node-cron');
 const socket = require('socket.io');
 const { initializeSocket } = require('./utils/socketConfig');
 const { rappelleRendezVous } = require('./services/RendezVousService');
+const ServiceController = require('./controllers/ServiceController');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../uploads')));
@@ -18,7 +19,7 @@ app.use(express.static(path.join(__dirname, '../uploads')));
 connectDB();
 
 app.use('/api', routes);
-
+app.get('/', ServiceController.getService)
 // cron.schedule('0 * * * *', () => {
 //   console.log('Tâche exécutée toutes les heures !');
 // });
