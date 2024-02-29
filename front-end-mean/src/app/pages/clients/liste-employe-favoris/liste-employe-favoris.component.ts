@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-liste-employe-favoris',
@@ -11,7 +12,7 @@ export class ListeEmployeFavorisComponent {
 
   listeEmployeFavoris:any[]= []
   loading:boolean = false
-  url ="http://localhost:3000"
+  url =environment.host
   constructor(private account:AccountService,private auth: AuthService){}
   ngOnInit(): void {
     this.auth.redirectIfNotConnect()

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   //ao anaty cookie le token amizay securisé koko
   constructor(private cookieService: CookieService,private router:Router){}
-  url = 'http://localhost:3000';
+  url = environment.host;
   storeToken(token: string) {
     this.cookieService.set('authToken', token);
   }
@@ -58,7 +59,7 @@ export class AuthService {
   
   async login(username:string,password:string){
     try{
-      return await axios.post(`${this.url}/api/account/login`,{username,password})
+      return await axios.post(`${this.url}/account/login`,{username,password})
     }
     catch(err){
       return null
@@ -66,23 +67,23 @@ export class AuthService {
   }
   async creationUserClient(data:any){
     try{
-      const role = await axios.get(`${this.url}/api/role`)
+      const role = await axios.get(`${this.url}/role`)
       const idRoleClient = role.data.data.filter((value:any)=>value.role === "client")
       data.role = idRoleClient[0]._id
-      return await axios.post(`${this.url}/api/account`,data)
+      return await axios.post(`${this.url}/account`,data)
     }
     catch(err){
       return null
     }
   }
   async envoyerMailReinitialisation(email: string) {
-    axios .post(`${this.url}/api/account/mdpoublie`, {email})
+    axios .post(`${this.url}/account/mdpoublie`, {email})
   }
   async reinitialiserMotDePasse(token: string,mdp: string) {
     console.log(token);
     try {
       return await axios.post(
-        `${this.url}/api/account/reinitilaserMdp`, 
+        `${this.url}/account/reinitilaserMdp`, 
         {mdp}, 
         {
           headers: {

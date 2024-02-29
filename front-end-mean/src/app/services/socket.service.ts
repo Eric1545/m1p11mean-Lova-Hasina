@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as io from 'socket.io-client';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class SocketService {
         "timeout" : 10000,                  
         "transports" : ["websocket"]
     };
-        this.socket = io.connect('http://localhost:3000',connectionOptions);
+        this.socket = io.connect(environment.socket,connectionOptions);
     }
 
     listen(eventname: string) : Observable<any> {

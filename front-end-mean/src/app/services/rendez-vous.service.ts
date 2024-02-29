@@ -7,7 +7,7 @@ import {AuthService} from "./auth.service";
   providedIn: 'root'
 })
 export class RendezVousService {
-  url = 'http://localhost:3000';
+  url = environment.host;
   private apiUrl = environment.host + '/rendezVous';
 
   constructor(private auth: AuthService) { }
@@ -80,7 +80,7 @@ export class RendezVousService {
   }
 
   getRendezVous(id: string,pageNumber: number,pageSize:number){
-    return axios.get(`${this.url}/api/rendezVous/getRendezVous/${id}/${pageNumber}/${pageSize}`)
+    return axios.get(`${this.url}/rendezVous/getRendezVous/${id}/${pageNumber}/${pageSize}`)
   }
 
   compteNbServiceAuPanier(){
@@ -99,6 +99,6 @@ export class RendezVousService {
 
 
   getRendezVousById(id: string){
-    return axios.get(`${this.url}/api/rendezVous/${id}`)
+    return axios.get(`${this.url}/rendezVous/${id}`)
   }
 }

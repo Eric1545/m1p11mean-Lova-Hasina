@@ -1,3 +1,4 @@
 export const environment = {
-  host: 'http://localhost:3000/api'
+  host: 'https://m1p11mean-lova-hasina.onrender.com/api',
+  socket: 'https://m1p11mean-lova-hasina.onrender.com'
 };

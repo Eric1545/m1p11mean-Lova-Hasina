@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadService {
 
-  url = 'http://localhost:3000';
+  url = environment.socket;
   constructor() { }
   uploadFile(file:File){
     const formData = new FormData()

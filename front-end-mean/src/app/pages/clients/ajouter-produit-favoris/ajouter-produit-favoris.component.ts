@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ServiceService } from 'src/app/services/service.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ajouter-produit-favoris',
@@ -12,7 +13,7 @@ export class AjouterProduitFavorisComponent implements OnInit {
   listeService:any[]= []
   listeProduitFavoris:any[]= []
   loading:boolean = false
-  url ="http://localhost:3000"
+  url =environment.host
   constructor(private service:ServiceService,private account:AccountService,private auth: AuthService) {}
   ngOnInit(): void {
     this.auth.redirectIfNotConnect()
