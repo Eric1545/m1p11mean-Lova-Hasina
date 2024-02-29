@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  constructor(private auth:AuthService){}
+  constructor(private auth:AuthService,private router:Router){}
   sideBar: any[] = []
   ngOnInit(): void {
     if(this.auth.getRole() === "manager"){
@@ -178,6 +179,20 @@ export class SidebarComponent implements OnInit {
           path:"/rendez-vous/terminer"
         },
       ]
+    }
+  }
+  toggleSubMenu(event: Event, path: string) {
+    event.preventDefault(); // prevent default behavior of the link
+    const target = event.target as HTMLElement;
+    const listItem = target.closest('.nav-item');
+    if (listItem) {
+      // Check if the link is a '#' or a real link
+      if (path === '#') {
+        listItem.classList.toggle('menu-open'); // toggle class to show/hide sub-menu
+      } else {
+        // If it's a real link, navigate to the specified path
+        this.router.navigate([path]);
+      }
     }
   }
 }

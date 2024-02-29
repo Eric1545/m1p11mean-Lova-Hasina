@@ -2,7 +2,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: pink; position: fixed !important;">
   <!-- Brand Logo -->
-  <a href="#" class="brand-link">
+  <a class="brand-link">
     <img src="assets/dist/img/salon-de-beaute.png" alt="salon-de-beaute Logo" class="brand-image img-circle elevation-3" style="opacity: .8; fill: white !important;"
          height="512" width="512">
     <span class="brand-text font-weight-light" style="color: deeppink">BEAUTY & SPA</span>
@@ -16,14 +16,14 @@
         <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a class="d-block">Alexander Pierce</a>
       </div>
     </div>
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <ng-container *ngFor="let item of sideBar">
           <li class="nav-item">
-            <a href="{{item.path}}" class="nav-link">
+            <a href="{{item.path}}" class="nav-link" (click)="toggleSubMenu($event,item.path)">
               <i class="{{ item.icon }}"></i>
               <p>
                 {{ item.name }}
