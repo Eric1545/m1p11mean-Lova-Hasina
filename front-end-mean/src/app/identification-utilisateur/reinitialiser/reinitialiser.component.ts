@@ -30,7 +30,7 @@ export class ReinitialiserComponent {
         this.authService.reinitialiserMotDePasse(this.id,this.form.password).then((res: any) => {
           console.log(res.data)
           this.loading = false
-          this.router.navigate(['/historique'])
+          this.router.navigate(['/'])
         }).catch((err: any) => {
           console.log(err)
           this.loading = false

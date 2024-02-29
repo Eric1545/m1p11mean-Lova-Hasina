@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
         this.authService.storeId(res.data.id)
         this.authService.storeRole(res.data.role)
         if(res.data.role == "client"){
-          this.router.navigate(['/client/historique'])
+          this.router.navigate(['/rendez-vous/ajouter-au-panier'])
         } else if(res.data.role == "manager"){
           this.router.navigate(['/employe/liste'])
         } else if(res.data.role == "employe"){
-          this.router.navigate(['/employe/liste'])
+          this.router.navigate(['/rendez-vous/liste'])
         }
       } else {
         this.messageErreur = "Vérifier votre user ou votre mot de passe"
