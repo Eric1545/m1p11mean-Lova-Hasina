@@ -25,7 +25,7 @@
 
       <div class="services-grid">
         <div class="service-card" *ngFor="let service of services">
-          <img class="service-image" src="assets/img/product-1.jpg" alt="Service 1">
+          <img class="service-image" src="{{ service.image ? (apiUrl + '/' + service.image) : 'assets/dist/img/pas_image.jpg' }}" alt="Service 1">
           <h3>{{service.nom}}</h3>
           <p>Prix: ${{service.prix}}</p>
           <p>Durée: {{service.duree}} minutes</p>

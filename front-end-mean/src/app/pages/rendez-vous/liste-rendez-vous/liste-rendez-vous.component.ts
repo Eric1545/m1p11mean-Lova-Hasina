@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OffreSpecialeService} from "../../../services/offre-speciale.service";
 import {RendezVousService} from "../../../services/rendez-vous.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-liste-rendez-vous',

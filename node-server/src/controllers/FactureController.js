@@ -1,4 +1,7 @@
-const { createFacture, getFactureClient, countFactureClient, payerFacture } = require("../services/FactureService");
+const { createFacture, getFactureClient, countFactureClient, payerFacture, statChiffreAffaireParJour,
+    statChiffreAffaireParMois
+} = require("../services/FactureService");
+const {nbRdvParMois, nbRdvParJours} = require("../services/RendezVousService");
 
 class FactureController {
     createFacture(req, res) {
@@ -11,6 +14,22 @@ class FactureController {
         } catch (error) {
             console.error('Error in postExample:', error);
             res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+    async statChiffreAffaireParJoursMois(req, res) {
+        const {mois, annee} = req.body;
+        try {
+            let reponse = null;
+            if (mois === 0) {
+                reponse = await statChiffreAffaireParMois(annee, true);
+            }
+            else {
+                reponse = await statChiffreAffaireParJour(mois, annee, true);
+            }
+            res.json({ message: 'statChiffreAffaireParJoursMois', data: reponse});
+        } catch (error) {
+            console.error('Error in postExample:', error);
+            res.status(500).json({message: 'Internal Server Error'});
         }
     }
     async getFactureClient(req, res) {

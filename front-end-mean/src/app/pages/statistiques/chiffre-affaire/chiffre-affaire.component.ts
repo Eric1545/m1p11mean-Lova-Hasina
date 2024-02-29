@@ -1,17 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {StatistiquesService} from "../../../services/statistiques.service";
-import { Chart } from 'chart.js/auto';
-
-
+import {Chart} from "chart.js/auto";
 
 @Component({
-  selector: 'app-reservation',
-  templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.css']
+  selector: 'app-chiffre-affaire',
+  templateUrl: './chiffre-affaire.component.html',
+  styleUrls: ['./chiffre-affaire.component.css']
 })
-export class ReservationComponent implements OnInit{
-  reservation: any = null;
+export class ChiffreAffaireComponent implements OnInit{
+  chiffreAffaire: any = null;
   donnee : any = {
     "mois": null,
     "annee": null
@@ -34,20 +32,19 @@ export class ReservationComponent implements OnInit{
     console.log(this.donnee.annee)
     this.donnee.mois = parseInt(this.donnee.mois, 10);
     this.donnee.annee = parseInt(this.donnee.annee, 10);
-    this.reservation = await this.statistiquesService.nbRdvParJoursMois(this.donnee);
-    const data = this.reservation.data;
-    console.log(data)
+    this.chiffreAffaire = await this.statistiquesService.chiffreAffaireJoursMois(this.donnee);
+    const data = this.chiffreAffaire.data;
 
     const labels = data.map(function (item: any) {
       return item._id;
     });
 
     var totalData = data.map(function (item: any) {
-      return item.count;
+      return item.chiffre_affaire;
     });
 
     var hoverInfo = data.map(function (item: any) {
-      return "Nombre de reservation: " + item.count;
+      return "Chiffre affaire: " + item.chiffre_affaire;
     });
 
     // Générez dynamiquement des couleurs en fonction du nombre d'éléments dans le tableau
@@ -59,7 +56,7 @@ export class ReservationComponent implements OnInit{
       this.myChart.destroy(); // Détruisez le graphique précédent
     }
 
-    this.myChart = new Chart("reservationChart", {
+    this.myChart = new Chart("chiffreAffaireChart", {
       type: 'bar',
       data: {
         labels: labels,
@@ -79,7 +76,7 @@ export class ReservationComponent implements OnInit{
           y: {
             title: {
               display: true,
-              text: 'Nombre de reservation', // Remplacez par le titre que vous souhaitez
+              text: 'Chiffre d\'affaire', // Remplacez par le titre que vous souhaitez
             },
           }
         },

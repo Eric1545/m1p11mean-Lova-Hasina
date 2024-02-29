@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ServiceService} from "../../../services/service.service";
 import {RendezVousService} from "../../../services/rendez-vous.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-ajouter-au-panier',
@@ -12,6 +13,7 @@ export class AjouterAuPanierComponent implements OnInit{
   services: any[] = [];
   messageErreur : any = null;
   messageSucces : any = null;
+  apiUrl = "http://localhost:3000";
 
   constructor(private serviceService: ServiceService, private rdvService: RendezVousService, private router: Router) {}
 

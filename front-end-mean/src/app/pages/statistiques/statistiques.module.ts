@@ -4,6 +4,7 @@ import { ReservationComponent } from './reservation/reservation.component';
 import {RouterModule, Routes} from "@angular/router";
 import {TemplateComponent} from "../../template/template.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ChiffreAffaireComponent } from './chiffre-affaire/chiffre-affaire.component';
 
 
 const routes: Routes = [
@@ -15,13 +16,18 @@ const routes: Routes = [
         path: 'reservation',
         component: ReservationComponent
       },
+      {
+        path: 'chiffre-affaire',
+        component: ChiffreAffaireComponent
+      },
     ]
   },
 ];
 
 @NgModule({
   declarations: [
-    ReservationComponent
+    ReservationComponent,
+    ChiffreAffaireComponent
   ],
   imports: [
     CommonModule,

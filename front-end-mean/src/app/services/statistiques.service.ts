@@ -16,4 +16,13 @@ export class StatistiquesService {
       throw erreur;
     }
   }
+
+  async chiffreAffaireJoursMois(donnee: any) {
+    try {
+      const reponse = await axios.post(`${this.apiUrl}/facture/statChiffreAffaireParJoursMois`, donnee);
+      return reponse.data;
+    } catch (erreur) {
+      throw erreur;
+    }
+  }
 }
