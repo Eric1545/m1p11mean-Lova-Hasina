@@ -58,5 +58,17 @@ export class LoginComponent implements OnInit {
       })
     }
   }
-
+  onClickDefaultUser(){
+    this.form.email = "hasina"
+    this.form.password = "hasina"
+  }
+  onClickDefaultManager(){
+    this.form.email = "admin"
+    this.form.password = "admin"
+  }
+  
+  onClickDefaultEmploye(){
+    this.form.email = "employe1"
+    this.form.password = "employe1"
+  }
 }

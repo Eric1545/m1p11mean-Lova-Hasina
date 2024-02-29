@@ -1,117 +1,125 @@
 <main>
-    <div class="container">
+  <div class="container">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-              <div class="d-flex justify-content-center py-4">
-                <a href="#" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/dist/img/salon-de-beaute.png" alt="salon-de-beaute Logo" style="opacity: .8; fill: white !important;"
-         height="50" width="50">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
-                </a>
-              </div><!-- End Logo -->
+            <div class="d-flex justify-content-center py-4">
+              <a href="#" class="logo d-flex align-items-center w-auto">
+                <img src="assets/dist/img/salon-de-beaute.png" alt="salon-de-beaute Logo"
+                  style="opacity: .8; fill: white !important;" height="50" width="50">
+                <span class="d-none d-lg-block">NiceAdmin</span>
+              </a>
+            </div><!-- End Logo -->
 
-              <div class="card mb-3">
+            <div class="card mb-3">
 
-                <div class="card-body">
+              <div class="card-body">
 
 
-                  <form class="row g-3 needs-validation" 
-                    #f="ngForm"
-                    (ngSubmit)="f.form.valid && onSubmit()">
+                <form class="row g-3 needs-validation" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
 
-                    <div class="col-12 d-flex justify-content-center">
-                      <h5 class="card-title text-center pb-0 fs-4">Login</h5>
-                      <!-- <p class="text-center small">Enter your username & password to login</p> -->
+                  <div class="col-12 d-flex justify-content-center">
+                    <h5 class="card-title text-center pb-0 fs-4">Login</h5>
+                    <!-- <p class="text-center small">Enter your username & password to login</p> -->
+                  </div>
+                  <div class="col-12">
+                    <label for="yourUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      <input type="text" name="username" class="form-control" id="yourUsername" ngModel required
+                        [(ngModel)]="form.email" #email="ngModel">
+                      <div class="invalid-feedback">Please enter your username.</div>
                     </div>
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" ngModel required [(ngModel)]="form.email" #email="ngModel">
-                        <div class="invalid-feedback">Please enter your username.</div>
-                      </div>
-                    </div>
+                  </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Mot de passe</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" ngModel required [(ngModel)]="form.password" #password="ngModel">
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
+                  <div class="col-12">
+                    <label for="yourPassword" class="form-label">Mot de passe</label>
+                    <input type="password" name="password" class="form-control" id="yourPassword" ngModel required
+                      [(ngModel)]="form.password" #password="ngModel">
+                    <div class="invalid-feedback">Please enter your password!</div>
+                  </div>
 
-                    <!-- <div class="col-12">
+                  <!-- <div class="col-12">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
                         <label class="form-check-label" for="rememberMe">Remember me</label>
                       </div>
                     </div> -->
-                    <div class="col-12">
-                      <p class="small mb-0 text-danger">{{messageErreur}} </p>
-                    </div>
-                    <div class="col-12 mt-3">
-                      <button class="btn btn-primary w-100" type="submit">
-                        
-                        <!-- <div class="d-flex justify-content-center align-items-center" *ngIf="loading" style="height: 300px;">
+                  <div class="col-12">
+                    <p class="small mb-0 text-danger">{{messageErreur}} </p>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <button class="btn btn-primary w-100" type="submit">
+
+                      <!-- <div class="d-flex justify-content-center align-items-center" *ngIf="loading" style="height: 300px;">
                         </div> -->
+
+                      <span class="spinner-border spinner-border-sm" *ngIf="loading"></span>
+                      Login
+                    </button>
+                  </div>
+                  <div class="col-12 d-flex flex-row justify-content-between">
+                    <p class="small mb-0"><a href="inscription">Créer un compte</a></p>
+
+                    <p class="small mb-0"><a type="button" data-toggle="modal" data-target="#exampleModalScrollable">Mot
+                        de passe oublié</a></p>
                         
-                        <span class="spinner-border spinner-border-sm" *ngIf="loading"></span>
-                        Login
-                      </button>
-                    </div>
-                    <div class="col-12 d-flex flex-row justify-content-between">
-                      <p class="small mb-0"><a href="inscription">Créer un compte</a></p>
-                      
-                      <p class="small mb-0"><a type="button" data-toggle="modal" data-target="#exampleModalScrollable">Mot de passe oublié</a></p>
-                    </div>
-                  </form>
+                  </div>
+                  <div class="col-12 d-flex flex-row justify-content-between">
+                    <p class="small mb-0"><a type="button" (click)="onClickDefaultUser()">user defaut</a></p>
+                    <p class="small mb-0"><a type="button" (click)="onClickDefaultManager()">manager defaut</a></p>
+                    <p class="small mb-0"><a type="button" (click)="onClickDefaultEmploye()">employé defaut</a></p>
+                        
+                  </div>
+                </form>
 
-                </div>
               </div>
-
             </div>
+
           </div>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">Lien pour réinitialiser votre mot de passe</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalScrollableTitle">Lien pour réinitialiser votre mot de passe</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #mailSend="ngForm" (ngSubmit)="mailSend.form.valid && envoyerMailReinitialisation()">
+              <div class="modal-body">
+                <div class="col-12">
+                  <label for="yourUsername" class="form-label">Mail</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" name="username" class="form-control" id="yourUsername" ngModel required
+                      [(ngModel)]="mail" #email="ngModel">
+                    <div class="invalid-feedback">Please enter your username.</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <p class="small mb-0 text-danger">{{messageMail}} </p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">
+                  <span class="spinner-border spinner-border-sm" *ngIf="loadingSendMail"></span>
+                  Envoyer un mail
                 </button>
               </div>
-              <form 
-              #mailSend="ngForm"
-                    (ngSubmit)="mailSend.form.valid && envoyerMailReinitialisation()">
-                <div class="modal-body">
-                  <div class="col-12">
-                    <label for="yourUsername" class="form-label">Mail</label>
-                    <div class="input-group has-validation">
-                      <span class="input-group-text" id="inputGroupPrepend">@</span>
-                      <input type="text" name="username" class="form-control" id="yourUsername" ngModel required [(ngModel)]="mail" #email="ngModel">
-                      <div class="invalid-feedback">Please enter your username.</div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <p class="small mb-0 text-danger">{{messageMail}} </p>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                  <button type="submit" class="btn btn-primary">
-                    <span class="spinner-border spinner-border-sm" *ngIf="loadingSendMail"></span>
-                    Envoyer un mail
-                  </button>
-                </div>
-              </form>
-            </div>
+            </form>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </div>
-  </main>
+  </div>
+</main>
