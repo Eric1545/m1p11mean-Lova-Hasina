@@ -13,7 +13,7 @@ export class AjouterProduitFavorisComponent implements OnInit {
   listeService:any[]= []
   listeProduitFavoris:any[]= []
   loading:boolean = false
-  url =environment.host
+  url =environment.socket
   constructor(private service:ServiceService,private account:AccountService,private auth: AuthService) {}
   ngOnInit(): void {
     this.auth.redirectIfNotConnect()

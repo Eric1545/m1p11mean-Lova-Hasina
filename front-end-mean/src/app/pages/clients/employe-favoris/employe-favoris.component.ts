@@ -17,7 +17,7 @@ export class EmployeFavorisComponent implements OnInit {
   totalItems: number = 0;
   loading: boolean = false;
   listeEmployeFavoris:any[]= []
-  url = environment.host
+  url = environment.socket
   constructor(private accountService:AccountService,private auth: AuthService){}
   ngOnInit(): void {
     this.auth.redirectIfNotConnect()

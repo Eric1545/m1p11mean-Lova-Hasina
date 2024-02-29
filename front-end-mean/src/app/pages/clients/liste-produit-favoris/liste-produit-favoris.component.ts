@@ -13,7 +13,7 @@ export class ListeProduitFavorisComponent implements OnInit {
   listeProduitFavoris: any[] = []
   loading: boolean = false
 
-  url = environment.host
+  url = environment.socket
   constructor(private account: AccountService, private auth: AuthService) { }
   ngOnInit(): void {
     this.auth.redirectIfNotConnect()
